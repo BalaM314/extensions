@@ -1,15 +1,15 @@
 package balam314.extensions;
 
-import arc.util.*;
-import arc.util.Log.*;
+import arc.util.Log;
+import arc.util.Log.LogLevel;
+import balam314.extensions.register.ContentList;
 import balam314.extensions.register.EBlocks;
 import balam314.extensions.register.EItems;
+import balam314.extensions.register.ELiquids;
 import balam314.extensions.util.Mode;
 import balam314.extensions.util.Util;
-import balam314.extensions.register.ELiquids;
 import mindustry.Vars;
-import mindustry.ctype.ContentList;
-import mindustry.mod.*;
+import mindustry.mod.Mod;
 import mindustry.world.Block;
 
 public class Extensions extends Mod{
