@@ -2,11 +2,11 @@ package balam314.extensions;
 
 import arc.util.*;
 import arc.util.Log.*;
-import balam314.extensions.register.Blocks;
-import balam314.extensions.register.Items;
+import balam314.extensions.register.EBlocks;
+import balam314.extensions.register.EItems;
 import balam314.extensions.util.Mode;
 import balam314.extensions.util.Util;
-import balam314.extensions.register.Liquids;
+import balam314.extensions.register.ELiquids;
 import mindustry.Vars;
 import mindustry.ctype.ContentList;
 import mindustry.mod.*;
@@ -36,7 +36,7 @@ public class Extensions extends Mod{
     public void loadContent(){
         util.log("Loading content.");
 
-        ContentList[] allContent = {new Items(), new Liquids(), new Blocks()};
+        ContentList[] allContent = {new EItems(), new ELiquids(), new EBlocks()};
         for(ContentList list : allContent) {
             list.load();
             util.log("Loaded " + list.getClass().getName());

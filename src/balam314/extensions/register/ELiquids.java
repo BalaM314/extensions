@@ -2,10 +2,9 @@ package balam314.extensions.register;
 
 import arc.graphics.Color;
 import mindustry.content.StatusEffects;
-import mindustry.ctype.ContentList;
 import mindustry.type.Liquid;
 
-public class Liquids implements ContentList {
+public class ELiquids implements ContentList {
 
 	public static Liquid advancedCoolant;
 

@@ -1,7 +1,8 @@
 package balam314.extensions.world.blocks.production;
 
-import balam314.extensions.register.Items;
+import balam314.extensions.register.EItems;
 import mindustry.content.Fx;
+import mindustry.content.Items;
 import mindustry.entities.Damage;
 import mindustry.entities.Effect;
 import mindustry.gen.Sounds;
@@ -16,7 +17,7 @@ public class DetonatingCrafter extends GenericCrafter {
 	public Item antiDetonationItem = Items.phaseFabric;
 	public int explosionRadius = 3;
 	public int explosionDamage = 100;
-	public Effect explodeEffect = Fx.reactorExplosion;
+	public Effect explodeEffect = Fx.reactorExplosion;//TODO this is probably a bit much
 
 
 

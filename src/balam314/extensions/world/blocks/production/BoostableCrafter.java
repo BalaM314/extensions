@@ -1,12 +1,11 @@
 package balam314.extensions.world.blocks.production;
 
-import balam314.extensions.register.Items;
+import balam314.extensions.register.EItems;
+import mindustry.content.Items;
 import mindustry.type.Item;
 import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.meta.Stat;
 import mindustry.world.meta.StatUnit;
-
-import static mindustry.Vars.tilesize;
 
 public class BoostableCrafter extends GenericCrafter {
 
@@ -30,11 +29,6 @@ public class BoostableCrafter extends GenericCrafter {
 			return super.getProgressIncrease(base) * (isBoosted ? (1f + boostAmount) : 1f);
 		}
 
-		@Override
-		public void updateTile() {
-			super.updateTile();
-
-		}
 	}
 
 }

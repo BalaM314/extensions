@@ -1,10 +1,10 @@
 package balam314.extensions.register;
 
 import balam314.extensions.world.blocks.production.BoostableCrafter;
-import balam314.extensions.world.blocks.production.DetonatingCrafter;
 import mindustry.content.Fx;
+import mindustry.content.Items;
+import mindustry.content.Liquids;
 import mindustry.content.UnitTypes;
-import mindustry.ctype.ContentList;
 import mindustry.gen.Sounds;
 import mindustry.type.*;
 import mindustry.world.Block;
@@ -18,16 +18,18 @@ import mindustry.world.blocks.power.PowerNode;
 import mindustry.world.blocks.power.SolarGenerator;
 import mindustry.world.blocks.production.Drill;
 import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.blocks.production.LiquidConverter;
 import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.blocks.production.Pump;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.blocks.units.Reconstructor;
-import mindustry.world.draw.DrawMixer;
+import mindustry.world.draw.DrawDefault;
+import mindustry.world.draw.DrawLiquidTile;
+import mindustry.world.draw.DrawMulti;
+import mindustry.world.draw.DrawRegion;
 
 import static mindustry.type.ItemStack.with;
 
-public class Blocks implements ContentList {
+public class EBlocks implements ContentList {
 
 	public static Block
 
@@ -43,7 +45,7 @@ public class Blocks implements ContentList {
 
 	radiantShield, protactiniumMender, radiantDome, coreNexus, coreRadiant, crypt,
 
-	protactiniumNode, radiantNode, reinforcedBattery, advancedReactor, advancedSolarPanel,
+	protactiniumNode, radiantNode, reinforcedBattery, advancedReactor, advancedSolarPanel, /*radiantReactor, */
 
 	pentativeReconstructor, repairField
 	;
@@ -52,7 +54,7 @@ public class Blocks implements ContentList {
 	public void load() {
 
 		impactDrill = new Drill("impact-drill"){{
-			requirements(Category.production, with(Items.iridium, 65, Items.silicon, 120, Items.titanium, 100, Items.thorium, 150));
+			requirements(Category.production, with(EItems.iridium, 65, Items.silicon, 120, Items.titanium, 100, Items.thorium, 150));
 			drillTime = 240;
 			size = 5;
 			drawRim = true;
@@ -68,31 +70,32 @@ public class Blocks implements ContentList {
 			//specific value for funny number
 			liquidBoostIntensity = 1.7733f;
 
-			consumes.power(8f);
-			consumes.liquid(mindustry.content.Liquids.cryofluid, 0.1f).boost();
+			consumePower(8f);
+			consumeLiquid(mindustry.content.Liquids.cryofluid, 0.1f).boost();
 		}};
 		quadWeaver = new BoostableCrafter("quad-weaver"){{
-			requirements(Category.crafting, with(Items.protactinium, 50, Items.iridium, 80, Items.silicon, 160, Items.lead, 210, Items.thorium, 175));
+			requirements(Category.crafting, with(EItems.protactinium, 50, EItems.iridium, 80, Items.silicon, 160, Items.lead, 210, Items.thorium, 175));
 			craftEffect = Fx.smeltsmoke;
 			outputItem = new ItemStack(Items.phaseFabric, 4);
 			craftTime = 240f;
 			boostAmount = 1f;
-			boostItem = Items.protactinium;
+			boostItem = EItems.protactinium;
 			size = 3;
 			hasPower = true;
 
 			ambientSound = Sounds.techloop;
 			ambientSoundVolume = 0.02f;
 
-			consumes.items(with(Items.thorium, 5, Items.sand, 9));
-			consumes.item(Items.protactinium).boost();
-			consumes.power(25f);
+			consumeItems(with(Items.thorium, 5, Items.sand, 9));
+			//consumeItem(Items.protactinium).boost();
+			//TODO maybe have this be a boostable crafter
+			consumePower(25f);
 			itemCapacity = 30;
 		}};
 		decayAccelerator = new GenericCrafter("decay-accelerator"){{
 			requirements(Category.crafting, with(Items.surgeAlloy, 75, Items.phaseFabric, 100, Items.thorium, 150, Items.plastanium, 200, Items.silicon, 200));
 			craftEffect = Fx.greenCloud;
-			outputItem = new ItemStack(Items.protactinium, 2);
+			outputItem = new ItemStack(EItems.protactinium, 2);
 			craftTime = 180f;
 			size = 3;
 			hasPower = true;
@@ -100,14 +103,14 @@ public class Blocks implements ContentList {
 			ambientSound = Sounds.pulse;
 			ambientSoundVolume = 0.02f;
 
-			consumes.items(with(Items.thorium, 5, Items.surgeAlloy, 1, Items.phaseFabric, 3));
-			consumes.power(15f);
+			consumeItems(with(Items.thorium, 5, Items.surgeAlloy, 1, Items.phaseFabric, 3));
+			consumePower(15f);
 			itemCapacity = 30;
 			//TODO fix DetonatingCrafter and change to it
 		}};
-		advancedCoolantMixer = new LiquidConverter("advanced-coolant-mixer"){{
-			requirements(Category.crafting, with(Items.metaglass, 95, Items.silicon, 150, Items.iridium, 65, Items.titanium, 100));
-			outputLiquid = new LiquidStack(Liquids.advancedCoolant, 0.2f);
+		advancedCoolantMixer = new GenericCrafter("advanced-coolant-mixer"){{
+			requirements(Category.crafting, with(Items.metaglass, 95, Items.silicon, 150, EItems.iridium, 65, Items.titanium, 100));
+			outputLiquid = new LiquidStack(ELiquids.advancedCoolant, 0.2f);
 			craftTime = 60f;
 			size = 3;
 			hasPower = true;
@@ -116,17 +119,17 @@ public class Blocks implements ContentList {
 			rotate = false;
 			solid = true;
 			outputsLiquid = true;
-			drawer = new DrawMixer(true);
+			drawer = new DrawMulti(new DrawRegion("-bottom"), new DrawLiquidTile(Liquids.cryofluid){{drawLiquidLight = true;}}, new DrawLiquidTile(ELiquids.advancedCoolant){{drawLiquidLight = true;}}, new DrawDefault());
 
-			consumes.power(5f);
-			consumes.item(Items.iridium);
-			consumes.liquid(mindustry.content.Liquids.cryofluid, 0.5f);
+			consumePower(5f);
+			consumeItem(EItems.iridium);
+			consumeLiquid(mindustry.content.Liquids.cryofluid, 0.5f);
 		}};
 
 		impactPump = new Pump("impact-pump"){{
-			requirements(Category.liquid, with(Items.titanium, 100, Items.metaglass, 120, Items.silicon, 150, Items.thorium, 50, Items.iridium, 35));
+			requirements(Category.liquid, with(Items.titanium, 100, Items.metaglass, 120, Items.silicon, 150, Items.thorium, 50, EItems.iridium, 35));
 			pumpAmount = 0.35f;
-			consumes.power(5f);
+			consumePower(5f);
 			liquidCapacity = 100f;
 			hasPower = true;
 			size = 4;
@@ -139,51 +142,51 @@ public class Blocks implements ContentList {
 		}};
 
 		iridiumConveyor = new Conveyor("iridium-conveyor"){{
-			requirements(Category.distribution, with(Items.iridium, 2, Items.titanium, 2, Items.plastanium, 2, Items.silicon, 1));
+			requirements(Category.distribution, with(EItems.iridium, 2, Items.titanium, 2, Items.plastanium, 2, Items.silicon, 1));
 			health = 300;
 			speed = 0.26f;
 			displayedSpeed = 36f;
 		}};
 		allocator = new Router("allocator"){{
-			requirements(Category.distribution, with(Items.radiantAlloy, 9, Items.lead, 9, Items.copper, 9));
+			requirements(Category.distribution, with(EItems.iridium, 9, Items.lead, 9, Items.copper, 9));
 			size = 3;
 		}};
 
 
 		final int wallHealthMultiplier = 4;
 		iridiumWall = new Wall("iridium-wall"){{
-			requirements(Category.defense, with(Items.iridium, 6));
+			requirements(Category.defense, with(EItems.iridium, 6));
 			health = wallHealthMultiplier * 225;
 		}};
 		iridiumWallLarge = new Wall("iridium-wall-large"){{
-			requirements(Category.defense, with(Items.iridium, 24));
+			requirements(Category.defense, with(EItems.iridium, 24));
 			health = wallHealthMultiplier * 4 * 225;
 			size = 2;
 		}};
 		radiantWall = new Wall("radiant-wall"){{
-			requirements(Category.defense, with(Items.radiantAlloy, 5, Items.surgeAlloy, 8));
+			requirements(Category.defense, with(EItems.radiantAlloy, 5, Items.surgeAlloy, 8));
 			health = wallHealthMultiplier * 380;
 		}};
 		radiantWallLarge = new Wall("radiant-wall-large"){{
-			requirements(Category.defense, with(Items.radiantAlloy, 20, Items.surgeAlloy, 24));
+			requirements(Category.defense, with(EItems.radiantAlloy, 20, Items.surgeAlloy, 24));
 			health = wallHealthMultiplier * 4 * 380;
 			size = 2;
 		}};
 		radiantWallHuge = new Wall("radiant-wall-huge"){{
-			requirements(Category.defense, with(Items.radiantAlloy, 45, Items.surgeAlloy, 72));
+			requirements(Category.defense, with(EItems.radiantAlloy, 45, Items.surgeAlloy, 72));
 			health = wallHealthMultiplier * 9 * 380;
 			size = 3;
 		}};
 
 		overchargedShockMine = new ShockMine("overcharged-shock-mine"){{
-			requirements(Category.effect, with(Items.surgeAlloy, 99, Items.copper, 49, Items.silicon, 99, Items.radiantAlloy, 5));
+			requirements(Category.effect, with(Items.surgeAlloy, 99, Items.copper, 49, Items.silicon, 99, EItems.radiantAlloy, 5));
 			damage = 2;
 			size = 2;
 			//TODO change this to an EffectField class and make it damage all enemies within 100 blocks
 		}};
 
 		radiantShield = new ForceProjector("radiant-shield"){{
-			requirements(Category.effect, with(Items.radiantAlloy, 25, Items.plastanium, 75, Items.lead, 250, Items.titanium, 200, Items.silicon, 300));
+			requirements(Category.effect, with(EItems.radiantAlloy, 25, Items.plastanium, 75, Items.lead, 250, Items.titanium, 200, Items.silicon, 300));
 			size = 4;
 			radius = 180f;
 			phaseRadiusBoost = 80f;
@@ -193,12 +196,12 @@ public class Blocks implements ContentList {
 			cooldownLiquid = 2.0f;
 			cooldownBrokenBase = 1.0f;
 
-			consumes.item(Items.protactinium).boost();
-			consumes.power(40f);
+			consumeItem(EItems.protactinium).boost();
+			consumePower(40f);
 			//TODO nerf shield health and block crash damage
 		}};
 		protactiniumMender = new MendProjector("protactinium-mender"){{
-			requirements(Category.effect, with(Items.protactinium, 30, Items.iridium, 50, Items.lead, 100, Items.silicon, 150));
+			requirements(Category.effect, with(EItems.protactinium, 30, EItems.iridium, 50, Items.lead, 100, Items.silicon, 150));
 			size = 3;
 			reload = 120f;
 			range = 165f;
@@ -207,21 +210,21 @@ public class Blocks implements ContentList {
 			phaseBoost = 4.0f;
 			health = 1500;
 
-			consumes.power(15f);
+			consumePower(15f);
 		}};
 		radiantDome = new OverdriveProjector("radiant-dome"){{
-			requirements(Category.effect, with(Items.radiantAlloy, 75, Items.surgeAlloy, 175, Items.protactinium, 250, Items.iridium, 450, Items.silicon, 1500));
-			consumes.power(50f);
+			requirements(Category.effect, with(EItems.radiantAlloy, 75, Items.surgeAlloy, 175, EItems.protactinium, 250, EItems.iridium, 450, Items.silicon, 1500));
+			consumePower(50f);
 			size = 4;
 			range = 320f;
 			speedBoost = 3.5f;
 			useTime = 150f;
 			hasBoost = false;
 			itemCapacity = 40;
-			consumes.items(with(Items.radiantAlloy, 1, Items.surgeAlloy, 2, Items.silicon, 5));
+			consumeItems(with(EItems.radiantAlloy, 1, Items.surgeAlloy, 2, Items.silicon, 5));
 		}};
 		coreNexus = new CoreBlock("core-nexus"){{
-			requirements(Category.effect, with(Items.surgeAlloy, 1000, Items.plastanium, 1500, Items.iridium, 3000, Items.metaglass, 8000, Items.silicon, 13000));
+			requirements(Category.effect, with(Items.surgeAlloy, 1000, Items.plastanium, 1500, EItems.iridium, 3000, Items.metaglass, 8000, Items.silicon, 13000));
 
 			unitType = UnitTypes.gamma;//TODO delta
 			health = 9000;
@@ -234,7 +237,7 @@ public class Blocks implements ContentList {
 			//TODO mend effect
 		}};
 		coreRadiant = new CoreBlock("core-radiant"){{
-			requirements(Category.effect, with(Items.radiantAlloy, 2000, Items.protactinium, 4000, Items.phaseFabric, 5500, Items.iridium, 11000, Items.silicon, 20000));
+			requirements(Category.effect, with(EItems.radiantAlloy, 2000, EItems.protactinium, 4000, Items.phaseFabric, 5500, EItems.iridium, 11000, Items.silicon, 20000));
 
 			unitType = UnitTypes.gamma;//TODO epsilon
 			health = 36000;
@@ -247,7 +250,7 @@ public class Blocks implements ContentList {
 			//TODO mend & repair effect, damage effect
 		}};
 		crypt = new StorageBlock("crypt"){{
-			requirements(Category.effect, with(Items.titanium, 750, Items.thorium, 400, Items.iridium, 100));
+			requirements(Category.effect, with(Items.titanium, 750, Items.thorium, 400, EItems.iridium, 100));
 			size = 4;
 			itemCapacity = 4000;
 			health = 1200;
@@ -255,52 +258,52 @@ public class Blocks implements ContentList {
 		//todo add repairField
 
 		protactiniumNode = new PowerNode("protactinium-node"){{
-			requirements(Category.power, with(Items.protactinium, 10, Items.titanium, 10, Items.lead, 20, Items.silicon, 5));
+			requirements(Category.power, with(EItems.protactinium, 10, Items.titanium, 10, Items.lead, 20, Items.silicon, 5));
 			size = 1;
 			maxNodes = 20;
 			laserRange = 15f;
-			consumes.item(Items.protactinium).boost();
+			consumeItem(EItems.protactinium).boost();
 		}};
 		radiantNode = new PowerNode("radiant-node"){{
-			requirements(Category.power, with(Items.radiantAlloy, 25, Items.surgeAlloy, 50, Items.protactinium, 75, Items.plastanium, 100, Items.silicon, 150));
+			requirements(Category.power, with(EItems.radiantAlloy, 25, Items.surgeAlloy, 50, EItems.protactinium, 75, Items.plastanium, 100, Items.silicon, 150));
 			size = 3;
 			maxNodes = 8;
 			laserRange = 80f;
 			schematicPriority = -15;
 		}};
 		reinforcedBattery = new Battery("reinforced-battery"){{
-			requirements(Category.power, with(Items.iridium, 100, Items.titanium, 125, Items.lead, 250, Items.silicon, 200));
+			requirements(Category.power, with(EItems.iridium, 100, Items.titanium, 125, Items.lead, 250, Items.silicon, 200));
 			size = 4;
-			consumes.powerBuffered(200000f);
+			consumePowerBuffered(200000f);
 			baseExplosiveness = 0f;
 		}};
 		advancedReactor = new NuclearReactor("advanced-reactor"){{
-			requirements(Category.power, with(Items.surgeAlloy, 75, Items.protactinium, 250, Items.iridium, 400, Items.lead, 600, Items.silicon, 1000, Items.metaglass, 250));
+			requirements(Category.power, with(Items.surgeAlloy, 75, EItems.protactinium, 250, EItems.iridium, 400, Items.lead, 600, Items.silicon, 1000, Items.metaglass, 250));
 			ambientSound = Sounds.hum;
 			ambientSoundVolume = 0.24f;
 			size = 4;
 			health = 2500;
 			itemDuration = 320f;
 			powerProduction = 75f;
-			consumes.item(Items.protactinium);
+			consumeItem(EItems.protactinium);
 			heating = 0.02f;
-			consumes.liquid(Liquids.advancedCoolant, heating / coolantPower).update(false);
-			//todo stop kabooming
+			consumeLiquid(ELiquids.advancedCoolant, heating / coolantPower).update(false);
+			explosionRadius = 1;
 		}};
 		advancedSolarPanel = new SolarGenerator("advanced-solar-generator"){{
-			requirements(Category.power, with(Items.protactinium, 45, Items.iridium, 56, Items.silicon, 180, Items.lead, 150));
+			requirements(Category.power, with(EItems.protactinium, 45, EItems.iridium, 56, Items.silicon, 180, Items.lead, 150));
 			size = 4;
 			powerProduction = 1.6f;
 		}};
 
 		pentativeReconstructor = new Reconstructor("pentative-reconstructor"){{
-			requirements(Category.units, with(Items.radiantAlloy, 500, Items.protactinium, 3000, Items.surgeAlloy, 3200, Items.iridium, 4000, Items.phaseFabric, 3500, Items.silicon, 12000, Items.thorium, 12000));
+			requirements(Category.units, with(EItems.radiantAlloy, 500, EItems.protactinium, 3000, Items.surgeAlloy, 3200, EItems.iridium, 4000, Items.phaseFabric, 3500, Items.silicon, 12000, Items.thorium, 12000));
 
-			size = 1;
-			consumes.power(180f);
-			consumes.items(with(Items.radiantAlloy, 200, Items.protactinium, 1500, Items.iridium, 3000, Items.silicon, 4000, Items.surgeAlloy, 1600, Items.metaglass, 4000, Items.phaseFabric, 2500));
-			consumes.liquid(Liquids.advancedCoolant, 4f);
-			consumes.liquid(mindustry.content.Liquids.cryofluid, 6f);
+			size = 11;
+			consumePower(180f);
+			consumeItems(with(EItems.radiantAlloy, 200, EItems.protactinium, 1500, EItems.iridium, 3000, Items.silicon, 4000, Items.surgeAlloy, 1600, Items.metaglass, 4000, Items.phaseFabric, 2500));
+			consumeLiquid(ELiquids.advancedCoolant, 4f);
+			consumeLiquid(mindustry.content.Liquids.cryofluid, 6f);
 
 			constructTime = 60f * 60f * 12;
 			liquidCapacity = 1440f;
@@ -314,7 +317,9 @@ public class Blocks implements ContentList {
 					new UnitType[]{UnitTypes.corvus, UnitTypes.flare},
 					new UnitType[]{UnitTypes.navanax, UnitTypes.flare}
 			);
-		}};;
+		}};
+
+
 
 
 	}
