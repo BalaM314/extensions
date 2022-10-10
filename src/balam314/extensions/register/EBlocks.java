@@ -1,28 +1,32 @@
 package balam314.extensions.register;
 
 import balam314.extensions.world.blocks.production.BoostableCrafter;
+import balam314.extensions.world.blocks.production.DetonatingCrafter;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.content.UnitTypes;
 import mindustry.gen.Sounds;
-import mindustry.type.*;
+import mindustry.type.Category;
+import mindustry.type.ItemStack;
+import mindustry.type.LiquidStack;
+import mindustry.type.UnitType;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.distribution.Conveyor;
 import mindustry.world.blocks.distribution.Router;
 import mindustry.world.blocks.liquid.LiquidRouter;
-import mindustry.world.blocks.power.NuclearReactor;
 import mindustry.world.blocks.power.Battery;
+import mindustry.world.blocks.power.NuclearReactor;
 import mindustry.world.blocks.power.PowerNode;
 import mindustry.world.blocks.power.SolarGenerator;
 import mindustry.world.blocks.production.Drill;
 import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.blocks.production.Pump;
 import mindustry.world.blocks.storage.CoreBlock;
+import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.blocks.units.Reconstructor;
-import mindustry.world.consumers.ConsumeItems;
+import mindustry.world.blocks.units.RepairTower;
 import mindustry.world.draw.DrawDefault;
 import mindustry.world.draw.DrawLiquidTile;
 import mindustry.world.draw.DrawMulti;
@@ -90,7 +94,7 @@ public class EBlocks implements ContentList {
 			consumeItem(EItems.protactinium).boost();
 			itemCapacity = 30;
 		}};
-		decayAccelerator = new GenericCrafter("decay-accelerator"){{
+		decayAccelerator = new DetonatingCrafter("decay-accelerator"){{
 			requirements(Category.crafting, with(Items.surgeAlloy, 75, Items.phaseFabric, 100, Items.thorium, 150, Items.plastanium, 200, Items.silicon, 200));
 			craftEffect = Fx.greenCloud;
 			outputItem = new ItemStack(EItems.protactinium, 2);
@@ -98,13 +102,16 @@ public class EBlocks implements ContentList {
 			size = 3;
 			hasPower = true;
 
+			explosionRadius = 4;
+			explosionCauserName = "radiation";
+
 			ambientSound = Sounds.pulse;
 			ambientSoundVolume = 0.02f;
 
-			consumeItems(with(Items.thorium, 5, Items.surgeAlloy, 1, Items.phaseFabric, 3));
+			consumeItems(with(Items.thorium, 5, Items.surgeAlloy, 1));
+			antiDetonationItem = consumeItem(Items.phaseFabric, 3).optional(true, false);
 			consumePower(15f);
 			itemCapacity = 30;
-			//TODO fix DetonatingCrafter and change to it
 		}};
 		advancedCoolantMixer = new GenericCrafter("advanced-coolant-mixer"){{
 			requirements(Category.crafting, with(Items.metaglass, 95, Items.silicon, 150, EItems.iridium, 65, Items.titanium, 100));
@@ -294,6 +301,10 @@ public class EBlocks implements ContentList {
 			powerProduction = 1.6f;
 		}};
 
+		repairField = new RepairTower("repair-field"){{
+			requirements(Category.units, with(EItems.iridium, 100, Items.silicon, 180, Items.plastanium, 110, EItems.protactinium, 20));
+			size = 3;
+		}};
 		pentativeReconstructor = new Reconstructor("pentative-reconstructor"){{
 			requirements(Category.units, with(EItems.radiantAlloy, 500, EItems.protactinium, 3000, Items.surgeAlloy, 3200, EItems.iridium, 4000, Items.phaseFabric, 3500, Items.silicon, 12000, Items.thorium, 12000));
 
@@ -315,6 +326,7 @@ public class EBlocks implements ContentList {
 					new UnitType[]{UnitTypes.corvus, UnitTypes.flare},
 					new UnitType[]{UnitTypes.navanax, UnitTypes.flare}
 			);
+			//TODO t6 units instead of flare
 		}};
 
 
