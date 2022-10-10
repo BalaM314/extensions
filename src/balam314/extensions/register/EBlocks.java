@@ -187,7 +187,7 @@ public class EBlocks implements ContentList {
 			requirements(Category.effect, with(Items.surgeAlloy, 99, Items.copper, 49, Items.silicon, 99, EItems.radiantAlloy, 5));
 			damage = 2;
 			size = 2;
-			//TODO change this to an EffectField class and make it damage all enemies within 100 blocks
+			//TODO change this to an EffectField class and make it damage all enemies within 10 blocks
 		}};
 
 		radiantShield = new ForceProjector("radiant-shield"){{
@@ -260,7 +260,6 @@ public class EBlocks implements ContentList {
 			itemCapacity = 4000;
 			health = 1200;
 		}};
-		//todo add repairField
 
 		protactiniumNode = new PowerNode("protactinium-node"){{
 			requirements(Category.power, with(EItems.protactinium, 10, Items.titanium, 10, Items.lead, 20, Items.silicon, 5));
@@ -340,9 +339,8 @@ public class EBlocks implements ContentList {
 			liquidCapacity = 1440f;
 
 			upgrades.addAll(
-					new UnitType[]{UnitTypes.eclipse, UnitTypes.flare}//TODO flarogus
+				new UnitType[]{UnitTypes.eclipse, UnitTypes.flare}//TODO flarogus
 			);
-			//TODO t6 units instead of flare
 		}};
 
 

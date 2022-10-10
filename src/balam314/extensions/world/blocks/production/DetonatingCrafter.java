@@ -40,7 +40,6 @@ public class DetonatingCrafter extends GenericCrafter {
 	@Override
 	public void setStats() {
 		super.setStats();
-		//TODO add anti detonation item
 	}
 
 	@Override
