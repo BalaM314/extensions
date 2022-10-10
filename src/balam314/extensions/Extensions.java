@@ -19,7 +19,7 @@ public class Extensions extends Mod{
     public static final String modID = "extensions";
     public static final Util util = new Util();
 
-    public static final Mode mode = Mode.normal;
+    public static final Mode mode = Mode.debug;
 
     public Extensions(){
         util.log("Starting...");

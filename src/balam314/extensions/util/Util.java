@@ -15,7 +15,7 @@ public class Util {
         if(spammyDebugTimer > 0){
             spammyDebugTimer--;
         }
-        if(Vars.net.client()) {
+        if(!Vars.net.client()) {
             if(Core.input.shift() && spammyDebugTimer == 0){
                 Log.info(message);
                 spammyDebugTimer = 10;

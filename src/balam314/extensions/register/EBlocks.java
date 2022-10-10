@@ -22,6 +22,7 @@ import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.blocks.production.Pump;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.blocks.units.Reconstructor;
+import mindustry.world.consumers.ConsumeItems;
 import mindustry.world.draw.DrawDefault;
 import mindustry.world.draw.DrawLiquidTile;
 import mindustry.world.draw.DrawMulti;
@@ -79,7 +80,6 @@ public class EBlocks implements ContentList {
 			outputItem = new ItemStack(Items.phaseFabric, 4);
 			craftTime = 240f;
 			boostAmount = 1f;
-			boostItem = EItems.protactinium;
 			size = 3;
 			hasPower = true;
 
@@ -87,9 +87,7 @@ public class EBlocks implements ContentList {
 			ambientSoundVolume = 0.02f;
 
 			consumeItems(with(Items.thorium, 5, Items.sand, 9));
-			//consumeItem(Items.protactinium).boost();
-			//TODO maybe have this be a boostable crafter
-			consumePower(25f);
+			consumeItem(EItems.protactinium).boost();
 			itemCapacity = 30;
 		}};
 		decayAccelerator = new GenericCrafter("decay-accelerator"){{
@@ -287,7 +285,7 @@ public class EBlocks implements ContentList {
 			powerProduction = 75f;
 			consumeItem(EItems.protactinium);
 			heating = 0.02f;
-			consumeLiquid(ELiquids.advancedCoolant, heating / coolantPower).update(false);
+			consumeLiquid(ELiquids.advancedCoolant, heating / coolantPower);
 			explosionRadius = 1;
 		}};
 		advancedSolarPanel = new SolarGenerator("advanced-solar-generator"){{
