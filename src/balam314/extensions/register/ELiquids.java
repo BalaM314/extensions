@@ -6,7 +6,7 @@ import mindustry.type.Liquid;
 
 public class ELiquids implements ContentList {
 
-	public static Liquid advancedCoolant;
+	public static Liquid advancedCoolant, protactiniumPlasma;
 
 	@Override
 	public void load(){
@@ -14,8 +14,16 @@ public class ELiquids implements ContentList {
 			temperature = 0.05f;
 			viscosity = 0.2f;
 			heatCapacity = 1.3f;
-			effect = StatusEffects.freezing;//TODO change to frozen
+			effect = EStatusEffects.frozen;
 			lightColor = Color.valueOf("5522FF40");
+		}};
+
+		protactiniumPlasma = new Liquid("protactinium-plasma", Color.valueOf("7BF920")){{
+			temperature = 2f;
+			viscosity = 0.1f;
+			explosiveness = 1.6f;
+			effect = EStatusEffects.irradiated;
+			lightColor = Color.valueOf("7BF920");
 		}};
 	}
 }

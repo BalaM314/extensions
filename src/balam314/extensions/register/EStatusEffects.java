@@ -10,7 +10,7 @@ import static mindustry.Vars.state;
 import static mindustry.content.StatusEffects.*;
 
 public class EStatusEffects implements ContentList {
-	public StatusEffect frozen, drenched, irradiated, radiant;
+	public static StatusEffect frozen, drenched, irradiated, radiated;
 
 	@Override
 	public void load(){
@@ -49,6 +49,29 @@ public class EStatusEffects implements ContentList {
 					}
 				});
 				opposite(burning, melting);
+			});
+		}};
+
+		irradiated = new StatusEffect("irradiated"){{
+			color = Color.valueOf("7bf920");
+			effect = Fx.greenCloud;
+			effectChance = 0.09f;
+			transitionDamage = 40;
+			damage = 1.6f;
+
+			init(() -> {
+				opposite(radiated);
+			});
+		}};
+
+		radiated = new StatusEffect("radiated"){{
+			color = Color.valueOf("20f97E");
+			effect = Fx.greenCloud;
+			effectChance = 0.09f;
+			healthMultiplier = 1.1f;
+			speedMultiplier = 1.2f;
+			init(() -> {
+				opposite(irradiated);
 			});
 		}};
 	}
