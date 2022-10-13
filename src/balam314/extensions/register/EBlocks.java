@@ -15,6 +15,7 @@ import mindustry.world.Block;
 import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.distribution.Conveyor;
 import mindustry.world.blocks.distribution.Router;
+import mindustry.world.blocks.environment.OreBlock;
 import mindustry.world.blocks.liquid.LiquidRouter;
 import mindustry.world.blocks.power.Battery;
 import mindustry.world.blocks.power.NuclearReactor;
@@ -38,6 +39,8 @@ public class EBlocks implements ContentList {
 
 	public static Block
 
+	iridiumOre,
+
 	impactDrill, decayAccelerator, quadWeaver, advancedCoolantMixer,
 
 	impactPump, liquidVault,
@@ -57,6 +60,12 @@ public class EBlocks implements ContentList {
 
 	@Override
 	public void load() {
+
+		iridiumOre = new OreBlock(EItems.iridium){{
+			oreDefault = true;
+			oreThreshold = 0.891f;
+			oreScale = 27.2f;
+		}};
 
 		impactDrill = new Drill("impact-drill"){{
 			requirements(Category.production, with(EItems.iridium, 65, Items.silicon, 120, Items.titanium, 100, Items.thorium, 150));
