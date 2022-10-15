@@ -312,6 +312,7 @@ public class EBlocks implements ContentList {
 		repairField = new RepairTower("repair-field"){{
 			requirements(Category.units, with(EItems.iridium, 100, Items.silicon, 180, Items.plastanium, 110, EItems.protactinium, 20));
 			size = 3;
+			consumePowerCond(5, (RepairTowerBuild b) -> b.targets.size != 0);
 		}};
 		pentativeReconstructor = new Reconstructor("pentative-reconstructor"){{
 			requirements(Category.units, with(EItems.radiantAlloy, 500, EItems.protactinium, 3000, Items.surgeAlloy, 3200, EItems.iridium, 4000, Items.phaseFabric, 3500, Items.silicon, 12000, Items.thorium, 12000));

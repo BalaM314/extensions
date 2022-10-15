@@ -33,20 +33,13 @@ public class BoostableCrafter extends GenericCrafter {
 	public class BoostableCrafterBuild extends GenericCrafterBuild {
 		@Override
 		public float efficiencyScale() {
-
 			float minEfficiency = 1f;
 			for(Consume cons : block.optionalConsumers){
 				minEfficiency = Math.min(minEfficiency, cons.efficiency(self()));
 			}
-			util.spammyDebug(Strings.format("effScale called, Efficiency is @", minEfficiency));
 			return 1 + (minEfficiency * boostAmount);
 		}
 
-		@Override
-		public void updateTile() {
-			super.updateTile();
-			util.spammyDebug(Strings.format("updateTile called on boostable crafter"));
-		}
 	}
 
 }
