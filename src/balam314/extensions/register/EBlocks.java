@@ -156,7 +156,7 @@ public class EBlocks implements ContentList {
 		}};
 
 		iridiumConveyor = new Conveyor("iridium-conveyor"){{
-			requirements(Category.distribution, with(EItems.iridium, 2, Items.titanium, 2, Items.plastanium, 2, Items.silicon, 1));
+			requirements(Category.distribution, with(EItems.iridium, 1, Items.titanium, 1, Items.metaglass, 1));
 			health = 300;
 			speed = 0.26f;
 			displayedSpeed = 36f;
