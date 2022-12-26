@@ -65,6 +65,7 @@ public class EBlocks implements ContentList {
 			oreDefault = true;
 			oreThreshold = 0.891f;
 			oreScale = 27.2f;
+			variants = 3;
 		}};
 
 		impactDrill = new Drill("impact-drill"){{
