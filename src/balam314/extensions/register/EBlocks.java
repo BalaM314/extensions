@@ -236,7 +236,7 @@ public class EBlocks implements ContentList {
 			useTime = 150f;
 			hasBoost = false;
 			itemCapacity = 40;
-			consumeItems(with(EItems.radiantAlloy, 1, Items.surgeAlloy, 2, Items.silicon, 5));
+			consumeItems(with(EItems.radiantAlloy, 1, EItems.protactinium, 2, Items.phaseFabric, 5));
 		}};
 		coreNexus = new CoreBlock("core-nexus"){{
 			requirements(Category.effect, with(Items.surgeAlloy, 1000, Items.plastanium, 1500, EItems.iridium, 3000, Items.metaglass, 8000, Items.silicon, 13000));
