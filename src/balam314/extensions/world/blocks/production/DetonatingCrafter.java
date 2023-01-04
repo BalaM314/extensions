@@ -69,7 +69,7 @@ public class DetonatingCrafter extends GenericCrafter {
 		public void onDestroyed(){
 			super.onDestroyed();
 
-			if(Vars.state.rules.reactorExplosions){
+			if(Vars.state.rules.reactorExplosions && this.efficiency > 0){
 				createExplosion();
 			}
 		}
