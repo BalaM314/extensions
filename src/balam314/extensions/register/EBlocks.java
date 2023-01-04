@@ -129,7 +129,7 @@ public class EBlocks implements ContentList {
 			requirements(Category.crafting, with(EItems.iridium, 150, Items.thorium, 165, Items.plastanium, 100, Items.silicon, 200, EItems.protactinium, 50));
 			craftEffect = Fx.lightning;
 			outputItem = new ItemStack(EItems.radiantAlloy, 1);
-			craftTime = 240f;
+			craftTime = 120f;
 			size = 4;
 			hasPower = true;
 
@@ -140,7 +140,7 @@ public class EBlocks implements ContentList {
 			ambientSound = Sounds.electricHum;
 			ambientSoundVolume = 0.02f;
 
-			consumeItems(with(Items.surgeAlloy, 2, Items.thorium, 5, EItems.protactinium, 1, Items.sporePod, 10));
+			consumeItems(with(Items.surgeAlloy, 2, EItems.iridium, 5, EItems.protactinium, 1, Items.sporePod, 10));
 			antiDetonationItem = consumeLiquid(ELiquids.advancedCoolant, 9f / 60f).optional(true, false);
 			consumePower(32f);
 			itemCapacity = 20;
