@@ -120,8 +120,8 @@ public class EBlocks implements ContentList {
 			ambientSound = Sounds.pulse;
 			ambientSoundVolume = 0.02f;
 
-			consumeItems(with(Items.thorium, 5, Items.surgeAlloy, 1));
-			antiDetonationItem = consumeItem(Items.phaseFabric, 3).optional(true, false);
+			consumeItems(with(Items.thorium, 5));
+			antiDetonationItem = consumeItem(Items.phaseFabric, 2).optional(true, false);
 			consumePower(15f);
 			itemCapacity = 30;
 		}};
@@ -322,15 +322,18 @@ public class EBlocks implements ContentList {
 			health = 2500;
 			itemDuration = 320f;
 			powerProduction = 75f;
-			consumeItem(EItems.protactinium);
 			heating = 0.02f;
-			consumeLiquid(ELiquids.advancedCoolant, heating / coolantPower);
 			explosionRadius = 1;
+			itemCapacity = 45;
+
+			fuelItem = EItems.protactinium;
+			consumeItem(EItems.protactinium);
+			consumeLiquid(ELiquids.advancedCoolant, heating / coolantPower).update(false);
 		}};
 		advancedSolarPanel = new SolarGenerator("advanced-solar-generator"){{
 			requirements(Category.power, with(EItems.protactinium, 45, EItems.iridium, 56, Items.silicon, 180, Items.lead, 150));
-			size = 4;
-			powerProduction = 1.6f;
+			size = 5;
+			powerProduction = 2.4f;
 		}};
 
 		repairField = new RepairTower("repair-field"){{

@@ -27,7 +27,7 @@ public class BoostableCrafter extends GenericCrafter {
 
 	public void setStats() {
 		super.setStats();
-		stats.add(Stat.speedIncrease, (1f + boostAmount) * 100f, StatUnit.percent);
+		stats.add(Stat.speedMultiplier, 1f + boostAmount, StatUnit.timesSpeed);
 	}
 
 	public class BoostableCrafterBuild extends GenericCrafterBuild {
