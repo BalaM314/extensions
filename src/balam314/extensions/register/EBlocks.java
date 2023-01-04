@@ -1,5 +1,6 @@
 package balam314.extensions.register;
 
+import arc.graphics.*;
 import balam314.extensions.world.blocks.production.BoostableCrafter;
 import balam314.extensions.world.blocks.production.DetonatingCrafter;
 import mindustry.content.Fx;
@@ -41,7 +42,7 @@ public class EBlocks implements ContentList {
 
 	iridiumOre,
 
-	impactDrill, decayAccelerator, quadWeaver, advancedCoolantMixer,
+	impactDrill, decayAccelerator, quadWeaver, advancedCoolantMixer, fluxedOvercharger,
 
 	impactPump, liquidVault,
 
@@ -102,6 +103,7 @@ public class EBlocks implements ContentList {
 
 			consumeItems(with(Items.thorium, 5, Items.sand, 9));
 			consumeItem(EItems.protactinium).boost();
+			consumePower(12f);
 			itemCapacity = 30;
 		}};
 		decayAccelerator = new DetonatingCrafter("decay-accelerator"){{
@@ -122,6 +124,27 @@ public class EBlocks implements ContentList {
 			antiDetonationItem = consumeItem(Items.phaseFabric, 3).optional(true, false);
 			consumePower(15f);
 			itemCapacity = 30;
+		}};
+		fluxedOvercharger = new DetonatingCrafter("fluxed-overcharger"){{
+			requirements(Category.crafting, with(EItems.iridium, 150, Items.thorium, 165, Items.plastanium, 100, Items.silicon, 200, EItems.protactinium, 50));
+			craftEffect = Fx.lightning;
+			outputItem = new ItemStack(EItems.radiantAlloy, 1);
+			craftTime = 240f;
+			size = 4;
+			hasPower = true;
+
+			explosionRadius = 7;
+			explosionCauserName = "heat";
+			explosionBarColor = Color.red;
+
+			ambientSound = Sounds.electricHum;
+			ambientSoundVolume = 0.02f;
+
+			consumeItems(with(Items.surgeAlloy, 2, Items.thorium, 5, EItems.protactinium, 1, Items.sporePod, 10));
+			antiDetonationItem = consumeLiquid(ELiquids.advancedCoolant, 9f / 60f).optional(true, false);
+			consumePower(32f);
+			itemCapacity = 20;
+			liquidCapacity = 90f;
 		}};
 		advancedCoolantMixer = new GenericCrafter("advanced-coolant-mixer"){{
 			requirements(Category.crafting, with(Items.metaglass, 95, Items.silicon, 150, EItems.iridium, 65, Items.titanium, 100));
