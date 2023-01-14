@@ -17,6 +17,7 @@ import java.util.Arrays;
 import static balam314.extensions.Extensions.util;
 import static mindustry.type.ItemStack.with;
 
+/** A crafter that can be boosted by optional consumers. */
 public class BoostableCrafter extends GenericCrafter {
 
 	public float boostAmount = 0.5f;

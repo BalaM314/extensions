@@ -16,21 +16,25 @@ import mindustry.world.consumers.Consume;
 import static mindustry.Vars.tilesize;
 
 
-/**A crafter that detonates if it has insufficient supply of an item. */
+/**A crafter that detonates if it has insufficient supply of an ingredient. */
 public class DetonatingCrafter extends GenericCrafter {
-	public Consume antiDetonationItem;
+	/** The consumer that will cause detonation if not satisfied. */
+	public Consume antiDetonationCons;
+	/** If true, building will explode even if it wasn't running. */
+	public boolean explodeIfNotRunning = false;
+	/** If true, building will explode if something else blows it up. */
+	public boolean explodeIfExternalDestruction = true;
+
 	public int explosionRadius = 3;
 	public int explosionDamage = 100;
-	public Effect explodeEffect = Fx.massiveExplosion;
-	/** Time to detonate*/
-	public float explosionTime = 2f;
+	public Effect explosionEffect = Fx.massiveExplosion;
+	/** Time to detonate in ticks */
+	public float explosionTime = 2f * 60f;
 	public float explosionShake = 0f;
 	public float explosionShakeDuration = 12f;
-	public Sound explodeSound = Sounds.explosion;
-	public String explosionCauserName = "Sus level";
+	public Sound explosionSound = Sounds.explosion;
+	public String explosionCauserName = "sus-level";
 	public Color explosionBarColor = Color.lime;
-
-
 
 
 	public DetonatingCrafter(String name){
@@ -45,7 +49,7 @@ public class DetonatingCrafter extends GenericCrafter {
 	@Override
 	public void setBars() {
 		super.setBars();
-		addBar(explosionCauserName, (DetonatingCrafterBuild b) -> new Bar("bar." + explosionCauserName, explosionBarColor, () -> b.explosionTimer / (explosionTime * 60f)));
+		addBar(explosionCauserName, (DetonatingCrafterBuild b) -> new Bar("bar." + explosionCauserName, explosionBarColor, () -> b.explosionTimer / (explosionTime)));
 	}
 
 	public class DetonatingCrafterBuild extends GenericCrafterBuild {
@@ -54,14 +58,14 @@ public class DetonatingCrafter extends GenericCrafter {
 
 		@Override
 		public void updateTile() {
-			float antidetonationEfficiency = antiDetonationItem.efficiency(this);
+			float antidetonationEfficiency = antiDetonationCons.efficiency(this);
 			if(antidetonationEfficiency == 1f){
 				explosionTimer --;
 				if(explosionTimer < 0) explosionTimer = 0;
 			} else if(this.efficiency > 0){
 				explosionTimer += (1 - antidetonationEfficiency) * this.efficiency;
 			}
-			if(explosionTimer >= explosionTime * 60f) this.kill();
+			if(explosionTimer >= explosionTime) this.kill();
 			super.updateTile();
 		}
 
@@ -69,7 +73,11 @@ public class DetonatingCrafter extends GenericCrafter {
 		public void onDestroyed(){
 			super.onDestroyed();
 
-			if(Vars.state.rules.reactorExplosions && this.efficiency > 0){
+			if(
+				Vars.state.rules.reactorExplosions && 
+				((explosionTimer >= explosionTime) || explodeIfExternalDestruction) &&
+				(this.efficiency > 0 || explodeIfNotRunning) //Only explode if running
+			){
 				createExplosion();
 			}
 		}
@@ -79,8 +87,8 @@ public class DetonatingCrafter extends GenericCrafter {
 				Damage.damage(x, y, explosionRadius * tilesize, explosionDamage);
 			}
 
-			explodeEffect.at(this);
-			explodeSound.at(this);
+			explosionEffect.at(this);
+			explosionSound.at(this);
 
 			if(explosionShake > 0){
 				Effect.shake(explosionShake, explosionShakeDuration, this);

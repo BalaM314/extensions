@@ -121,7 +121,7 @@ public class EBlocks implements ContentList {
 			ambientSoundVolume = 0.02f;
 
 			consumeItems(with(Items.thorium, 5));
-			antiDetonationItem = consumeItem(Items.phaseFabric, 2).optional(true, false);
+			antiDetonationCons = consumeItem(Items.phaseFabric, 2).optional(true, false);
 			consumePower(15f);
 			itemCapacity = 30;
 		}};
@@ -141,7 +141,7 @@ public class EBlocks implements ContentList {
 			ambientSoundVolume = 0.02f;
 
 			consumeItems(with(Items.surgeAlloy, 2, EItems.iridium, 5, EItems.protactinium, 1, Items.sporePod, 10));
-			antiDetonationItem = consumeLiquid(ELiquids.advancedCoolant, 9f / 60f).optional(true, false);
+			antiDetonationCons = consumeLiquid(ELiquids.advancedCoolant, 9f / 60f).optional(true, false);
 			consumePower(32f);
 			itemCapacity = 20;
 			liquidCapacity = 90f;
