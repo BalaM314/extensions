@@ -1,11 +1,13 @@
 package balam314.extensions;
 
+import arc.Events;
 import arc.util.Log;
 import arc.util.Log.LogLevel;
 import balam314.extensions.register.*;
 import balam314.extensions.util.Mode;
 import balam314.extensions.util.Util;
 import mindustry.Vars;
+import mindustry.game.EventType;
 import mindustry.mod.Mod;
 import mindustry.world.Block;
 
@@ -49,6 +51,10 @@ public class Extensions extends Mod{
             }
             Log.debug("--------------");
         }
+
+        Events.on(EventType.ContentInitEvent.class, e -> {
+            PostInit.load();
+        });
 
     }
 
