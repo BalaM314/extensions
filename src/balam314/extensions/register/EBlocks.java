@@ -2,12 +2,10 @@ package balam314.extensions.register;
 
 import arc.graphics.*;
 import arc.struct.EnumSet;
+import balam314.extensions.world.blocks.defense.turrets.AdvancedPointDefenseTurret;
 import balam314.extensions.world.blocks.production.BoostableCrafter;
 import balam314.extensions.world.blocks.production.DetonatingCrafter;
-import mindustry.content.Fx;
-import mindustry.content.Items;
-import mindustry.content.Liquids;
-import mindustry.content.UnitTypes;
+import mindustry.content.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
@@ -34,11 +32,13 @@ import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.blocks.storage.StorageBlock;
 import mindustry.world.blocks.units.Reconstructor;
 import mindustry.world.blocks.units.RepairTower;
+import mindustry.world.consumers.ConsumeLiquidFilter;
 import mindustry.world.draw.DrawDefault;
 import mindustry.world.draw.DrawLiquidTile;
 import mindustry.world.draw.DrawMulti;
 import mindustry.world.draw.DrawRegion;
 import mindustry.world.meta.BlockFlag;
+import mindustry.world.meta.Env;
 
 import static mindustry.type.ItemStack.with;
 
@@ -56,7 +56,7 @@ public class EBlocks implements ContentList {
 
 	iridiumWall, iridiumWallLarge, radiantWall, radiantWallLarge, radiantWallHuge,
 
-	surgeDuo, riptide, electron, muon, tauon, neutrino, radiance, overchargedShockMine,
+	surgeDuo, riptide, ray, electron, muon, tauon, neutrino, radiance, overchargedShockMine,
 
 	radiantShield, protactiniumMender, radiantDome, coreNexus, coreRadiant, crypt,
 
@@ -260,9 +260,8 @@ public class EBlocks implements ContentList {
 
 			limitRange();
 		}};
-
 		riptide = new LiquidTurret("riptide"){{
-			requirements(Category.turret, with(Items.metaglass, 200, Items.plastanium, 150, Items.thorium, 250, EItems.iridium, 100));
+			requirements(Category.turret, with(Items.metaglass, 300, Items.plastanium, 200, Items.thorium, 350, EItems.iridium, 200, Items.lead, 600));
 			ammo(
 				Liquids.water, new LiquidBulletType(Liquids.water){{
 					lifetime = 39.1f;
@@ -343,11 +342,62 @@ public class EBlocks implements ContentList {
 			shootCone = 45f;
 			liquidCapacity = 60f;
 			shootEffect = Fx.shootLiquid;
-			range = 350f;
+			range = 340f;
 			scaledHealth = 250;
 			flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
 			consumePower(2f);
 		}};
+		ray = new AdvancedPointDefenseTurret("ray"){{
+			requirements(Category.turret, with(Items.copper, 750, Items.silicon, 700, EItems.iridium, 600, EItems.protactinium, 300, Items.surgeAlloy, 200));
+
+			scaledHealth = 250;
+			range = 250f;
+			hasPower = true;
+			consumePower(19f);
+			size = 4;
+			shootLength = 5f;
+			bulletDamage = 65f;
+			reload = 6f;
+			envEnabled |= Env.space;
+		}};
+		electron = new LaserTurret("electron"){{
+			//this is supposed to be a continuous meltdown but I ran into a bunch of issues making that so now it's just a better meltdown
+			//TODO AdvancedLaserTurret: shoots continously, and optionally takes damage if coolant runs out
+			requirements(Category.turret, with(Items.copper, 1600, Items.silicon, 700, EItems.iridium, 550, Items.surgeAlloy, 425, EItems.protactinium, 200, Items.thorium, 800));
+			shootEffect = Fx.shootBigSmoke2;
+			shootCone = 40f;
+			recoil = 4f;
+			size = 5;
+			shake = 2f;
+			range = 295f;
+			reload = 60f;
+			firingMoveFract = 0.5f;
+			shootDuration = 120f;
+			shootSound = Sounds.laserbig;
+			loopSound = Sounds.beam;
+			loopSoundVolume = 2f;
+			envEnabled |= Env.space;
+
+			shootType = new ContinuousLaserBulletType(141){{
+				length = 300f;
+				hitEffect = Fx.hitMeltdown;
+				hitColor = Pal.meltdownHit;
+				status = StatusEffects.melting;
+				drawSize = 480f;
+				colors = new Color[]{Color.valueOf("cffff955"), Color.valueOf("cffff9aa"), Color.valueOf("cffff9"), Color.white};
+
+				incendChance = 0.7f;
+				incendSpread = 5f;
+				incendAmount = 1;
+				ammoMultiplier = 1f;
+			}};
+
+			scaledHealth = 200;
+			coolant = consume(new ConsumeLiquidFilter(liquid -> liquid == ELiquids.advancedCoolant, 2f));
+			//TODO maybe increase dps somehow with advanced coolant and make it also accept cryofluid?
+			consumePower(55f);
+		}};
+
 
 		radiantShield = new ForceProjector("radiant-shield"){{
 			requirements(Category.effect, with(EItems.radiantAlloy, 25, Items.plastanium, 75, Items.lead, 250, Items.titanium, 200, Items.silicon, 300));
