@@ -265,11 +265,11 @@ public class EBlocks implements ContentList {
 			requirements(Category.turret, with(Items.metaglass, 200, Items.plastanium, 150, Items.thorium, 250, EItems.iridium, 100));
 			ammo(
 				Liquids.water, new LiquidBulletType(Liquids.water){{
-					lifetime = 24.5f;
-					speed = 8f;
+					lifetime = 39.1f;
+					speed = 9f;
 					knockback = 1.7f;
 					puddleSize = 8f;
-					orbSize = 4f;
+					orbSize = 7f;
 					drag = 0.001f;
 					ammoMultiplier = 0.4f;
 					statusDuration = 60f * 4f;
@@ -277,33 +277,33 @@ public class EBlocks implements ContentList {
 					layer = Layer.bullet - 2f;
 				}},
 				Liquids.slag,  new LiquidBulletType(Liquids.slag){{
-					lifetime = 24.5f;
-					speed = 8f;
+					lifetime = 39.1f;
+					speed = 9f;
 					knockback = 1.3f;
 					puddleSize = 8f;
-					orbSize = 4f;
+					orbSize = 7f;
 					damage = 9.5f;
 					drag = 0.001f;
 					ammoMultiplier = 0.4f;
 					statusDuration = 60f * 4f;
 				}},
 				Liquids.cryofluid, new LiquidBulletType(Liquids.cryofluid){{
-					lifetime = 24.5f;
-					speed = 8f;
+					lifetime = 39.1f;
+					speed = 9f;
 					knockback = 1.3f;
 					puddleSize = 8f;
-					orbSize = 4f;
+					orbSize = 7f;
 					drag = 0.001f;
 					ammoMultiplier = 0.4f;
 					statusDuration = 60f * 4f;
 					damage = 1.3f;
 				}},
 				Liquids.oil, new LiquidBulletType(Liquids.oil){{
-					lifetime = 24.5f;
-					speed = 8f;
+					lifetime = 39.1f;
+					speed = 9f;
 					knockback = 1.3f;
 					puddleSize = 8f;
-					orbSize = 4f;
+					orbSize = 7f;
 					drag = 0.001f;
 					ammoMultiplier = 0.4f;
 					statusDuration = 60f * 4f;
@@ -311,26 +311,27 @@ public class EBlocks implements ContentList {
 					layer = Layer.bullet - 2f;
 				}},
 				ELiquids.advancedCoolant, new LiquidBulletType(ELiquids.advancedCoolant){{
-					lifetime = 24.5f;
-					speed = 8f;
+					lifetime = 39.1f;
+					speed = 9f;
 					knockback = 1.3f;
 					puddleSize = 8f;
-					orbSize = 4f;
+					orbSize = 7f;
 					drag = 0.001f;
 					ammoMultiplier = 2.2f;
 					statusDuration = 60f * 6f;
 					damage = 1.7f;
 				}},
 				ELiquids.protactiniumPlasma, new LiquidBulletType(ELiquids.protactiniumPlasma){{
-					lifetime = 24.5f;
-					speed = 8f;
+					lifetime = 39.1f;
+					speed = 9f;
 					knockback = 1.3f;
 					puddleSize = 8f;
-					orbSize = 4f;
+					orbSize = 7f;
 					damage = 20.75f;
 					drag = 0.001f;
 					ammoMultiplier = 4f;
 					statusDuration = 60f * 10f;
+					boilTime = Float.MAX_VALUE;
 				}}
 			);
 			size = 4;

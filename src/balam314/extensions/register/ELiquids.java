@@ -21,7 +21,7 @@ public class ELiquids implements ContentList {
 		protactiniumPlasma = new Liquid("protactinium-plasma", Color.valueOf("7BF920")){{
 			temperature = 2f;
 			viscosity = 0.1f;
-			explosiveness = 1.6f;
+			explosiveness = 7f;
 			effect = EStatusEffects.irradiated;
 			lightColor = Color.valueOf("7BF920");
 			gas = true;
