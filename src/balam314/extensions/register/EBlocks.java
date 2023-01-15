@@ -1,19 +1,24 @@
 package balam314.extensions.register;
 
 import arc.graphics.*;
+import arc.struct.EnumSet;
 import balam314.extensions.world.blocks.production.BoostableCrafter;
 import balam314.extensions.world.blocks.production.DetonatingCrafter;
 import mindustry.content.Fx;
 import mindustry.content.Items;
 import mindustry.content.Liquids;
 import mindustry.content.UnitTypes;
+import mindustry.entities.bullet.*;
+import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
+import mindustry.graphics.*;
 import mindustry.type.Category;
 import mindustry.type.ItemStack;
 import mindustry.type.LiquidStack;
 import mindustry.type.UnitType;
 import mindustry.world.Block;
 import mindustry.world.blocks.defense.*;
+import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.blocks.distribution.Conveyor;
 import mindustry.world.blocks.distribution.Router;
 import mindustry.world.blocks.environment.OreBlock;
@@ -33,6 +38,7 @@ import mindustry.world.draw.DrawDefault;
 import mindustry.world.draw.DrawLiquidTile;
 import mindustry.world.draw.DrawMulti;
 import mindustry.world.draw.DrawRegion;
+import mindustry.world.meta.BlockFlag;
 
 import static mindustry.type.ItemStack.with;
 
@@ -221,6 +227,125 @@ public class EBlocks implements ContentList {
 			damage = 2;
 			size = 2;
 			//TODO change this to an EffectField class and make it damage all enemies within 10 blocks
+		}};
+
+		surgeDuo = new ItemTurret("surge-duo"){{
+			requirements(Category.turret, with(Items.copper, 35, Items.surgeAlloy, 69));
+			ammo(
+				Items.surgeAlloy, new LaserBoltBulletType(7.5f, 24){{
+					width = 4f;
+					height = 18f;
+					lifetime = 60f;
+					ammoMultiplier = 15;
+					backColor = Pal.bulletYellowBack;
+					frontColor = Pal.bulletYellow;
+					hitEffect = Fx.hitLaserColor;
+					despawnEffect = Fx.hitLaserColor;
+					hitColor = Pal.bulletYellow;
+				}}
+			);
+
+			shoot = new ShootAlternate(3.5f);
+
+			shootY = 3f;
+			reload = 20f;
+			range = 110;
+			shootCone = 15f;
+			ammoUseEffect = Fx.casing1;
+			health = 500;
+			inaccuracy = 2f;
+			rotateSpeed = 10f;
+			coolant = consumeCoolant(0.1f);
+			researchCostMultiplier = 0.05f;
+
+			limitRange();
+		}};
+
+		riptide = new LiquidTurret("riptide"){{
+			requirements(Category.turret, with(Items.metaglass, 200, Items.plastanium, 150, Items.thorium, 250, EItems.iridium, 100));
+			ammo(
+				Liquids.water, new LiquidBulletType(Liquids.water){{
+					lifetime = 24.5f;
+					speed = 8f;
+					knockback = 1.7f;
+					puddleSize = 8f;
+					orbSize = 4f;
+					drag = 0.001f;
+					ammoMultiplier = 0.4f;
+					statusDuration = 60f * 4f;
+					damage = 1.3f;
+					layer = Layer.bullet - 2f;
+				}},
+				Liquids.slag,  new LiquidBulletType(Liquids.slag){{
+					lifetime = 24.5f;
+					speed = 8f;
+					knockback = 1.3f;
+					puddleSize = 8f;
+					orbSize = 4f;
+					damage = 9.5f;
+					drag = 0.001f;
+					ammoMultiplier = 0.4f;
+					statusDuration = 60f * 4f;
+				}},
+				Liquids.cryofluid, new LiquidBulletType(Liquids.cryofluid){{
+					lifetime = 24.5f;
+					speed = 8f;
+					knockback = 1.3f;
+					puddleSize = 8f;
+					orbSize = 4f;
+					drag = 0.001f;
+					ammoMultiplier = 0.4f;
+					statusDuration = 60f * 4f;
+					damage = 1.3f;
+				}},
+				Liquids.oil, new LiquidBulletType(Liquids.oil){{
+					lifetime = 24.5f;
+					speed = 8f;
+					knockback = 1.3f;
+					puddleSize = 8f;
+					orbSize = 4f;
+					drag = 0.001f;
+					ammoMultiplier = 0.4f;
+					statusDuration = 60f * 4f;
+					damage = 1.3f;
+					layer = Layer.bullet - 2f;
+				}},
+				ELiquids.advancedCoolant, new LiquidBulletType(ELiquids.advancedCoolant){{
+					lifetime = 24.5f;
+					speed = 8f;
+					knockback = 1.3f;
+					puddleSize = 8f;
+					orbSize = 4f;
+					drag = 0.001f;
+					ammoMultiplier = 2.2f;
+					statusDuration = 60f * 6f;
+					damage = 1.7f;
+				}},
+				ELiquids.protactiniumPlasma, new LiquidBulletType(ELiquids.protactiniumPlasma){{
+					lifetime = 24.5f;
+					speed = 8f;
+					knockback = 1.3f;
+					puddleSize = 8f;
+					orbSize = 4f;
+					damage = 20.75f;
+					drag = 0.001f;
+					ammoMultiplier = 4f;
+					statusDuration = 60f * 10f;
+				}}
+			);
+			size = 4;
+			reload = 2f;
+			shoot.shots = 2;
+			velocityRnd = 0.1f;
+			inaccuracy = 4f;
+			recoil = 1f;
+			shootCone = 45f;
+			liquidCapacity = 60f;
+			shootEffect = Fx.shootLiquid;
+			range = 350f;
+			scaledHealth = 250;
+			flags = EnumSet.of(BlockFlag.turret, BlockFlag.extinguisher);
+			consumePower(2f);
 		}};
 
 		radiantShield = new ForceProjector("radiant-shield"){{
