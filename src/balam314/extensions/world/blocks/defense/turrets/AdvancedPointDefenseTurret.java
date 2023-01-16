@@ -32,7 +32,7 @@ public class AdvancedPointDefenseTurret extends PointDefenseTurret {
 			}
 
 			//look at target
-			if(target != null && target.within(this, range) && target.team != team && target.type() != null && target.type().hittable){
+			if(target != null && target.within(this, range) && target.team != team && target.type() != null){
 				float dest = angleTo(target);
 				rotation = Angles.moveToward(rotation, dest, rotateSpeed * edelta());
 				reloadCounter += edelta();
