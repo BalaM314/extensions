@@ -1,12 +1,14 @@
 package balam314.extensions.register;
 
 import arc.graphics.*;
+import arc.math.Mathf;
 import arc.struct.EnumSet;
 import balam314.extensions.world.blocks.defense.turrets.AdvancedPointDefenseTurret;
 import balam314.extensions.world.blocks.production.BoostableCrafter;
 import balam314.extensions.world.blocks.production.DetonatingCrafter;
 import mindustry.content.*;
 import mindustry.entities.bullet.*;
+import mindustry.entities.effect.MultiEffect;
 import mindustry.entities.pattern.*;
 import mindustry.gen.Sounds;
 import mindustry.graphics.*;
@@ -350,14 +352,14 @@ public class EBlocks implements ContentList {
 		ray = new AdvancedPointDefenseTurret("ray"){{
 			requirements(Category.turret, with(Items.copper, 750, Items.silicon, 700, EItems.iridium, 600, EItems.protactinium, 300, Items.surgeAlloy, 200));
 
-			scaledHealth = 250;
+			scaledHealth = 150;
 			range = 250f;
 			hasPower = true;
 			consumePower(19f);
 			size = 4;
 			shootLength = 5f;
 			bulletDamage = 65f;
-			reload = 6f;
+			reload = 4f;
 			envEnabled |= Env.space;
 		}};
 		electron = new LaserTurret("electron"){{
@@ -392,10 +394,147 @@ public class EBlocks implements ContentList {
 				ammoMultiplier = 1f;
 			}};
 
-			scaledHealth = 200;
+			scaledHealth = 250;
 			coolant = consume(new ConsumeLiquidFilter(liquid -> liquid == ELiquids.advancedCoolant, 2f));
 			//TODO maybe increase dps somehow with advanced coolant and make it also accept cryofluid?
 			consumePower(55f);
+		}};
+		muon = new ItemTurret("muon"){{
+			requirements(Category.turret, with(Items.copper, 1400, Items.silicon, 800, EItems.iridium, 550, Items.surgeAlloy, 425, EItems.protactinium, 200, Items.thorium, 800));
+
+			ammo(
+				EItems.iridium, new ArtilleryBulletType(12.5f, 800, "shell"){{
+					shootEffect = Fx.instShoot;
+					smokeEffect = Fx.smokeCloud;
+					hitEffect = Fx.instHit;
+
+					knockback = 2f;
+					lifetime = 72.5f;
+					height = 19f;
+					width = 17f;
+					backColor = hitColor = trailColor = Color.valueOf("eedddd");
+					frontColor = Color.white;
+					ammoMultiplier = 1f;
+					hitSound = Sounds.titanExplosion;
+
+					trailLength = 32;
+					trailWidth = 3.35f;
+					trailSinScl = 2.5f;
+					trailSinMag = 0.5f;
+					trailEffect = Fx.instTrail;
+					despawnShake = 7f;
+
+					trailInterp = v -> Math.max(Mathf.slope(v), 0.8f);
+					shrinkX = 0.2f;
+					shrinkY = 0.1f;
+					buildingDamageMultiplier = 0.1f;
+				}},
+				Items.blastCompound, new ArtilleryBulletType(12.5f, 300, "shell"){{
+					shootEffect = Fx.instShoot;
+					smokeEffect = Fx.smokeCloud;
+					hitEffect = Fx.instHit;
+
+					knockback = 2f;
+					lifetime = 72.5f;
+					height = 19f;
+					width = 17f;
+					splashDamageRadius = 55f;
+					splashDamage = 600f;
+					scaledSplashDamage = true;
+					backColor = hitColor = trailColor = Color.valueOf("ffaaaa");
+					frontColor = Color.white;
+					ammoMultiplier = 1f;
+					hitSound = Sounds.titanExplosion;
+					status = StatusEffects.blasted;
+
+					trailLength = 32;
+					trailWidth = 3.35f;
+					trailSinScl = 2.5f;
+					trailSinMag = 0.5f;
+					trailEffect = Fx.instTrail;
+					despawnShake = 7f;
+
+					trailInterp = v -> Math.max(Mathf.slope(v), 0.8f);
+					shrinkX = 0.2f;
+					shrinkY = 0.1f;
+					buildingDamageMultiplier = 0.1f;
+				}}
+			);
+
+			shootSound = Sounds.mediumCannon;
+			ammoPerShot = 4;
+			maxAmmo = ammoPerShot * 3;
+			targetAir = false;
+			shake = 4f;
+			recoil = 1f;
+			reload = 60f * 2.3f;
+			shootY = 7f;
+			rotateSpeed = 1.4f;
+			minWarmup = 0.85f;
+			shootWarmupSpeed = 0.07f;
+
+			shootWarmupSpeed = 0.08f;
+
+			outlineColor = Pal.darkOutline;
+
+			consumeLiquid(Liquids.water, 5f / 60f);
+
+			scaledHealth = 180;
+			range = 450f;
+			size = 5;
+			limitRange();
+		}};
+		tauon = new ItemTurret("tauon"){{
+			requirements(Category.turret, with(Items.lead, 1400, Items.metaglass, 900, EItems.iridium, 550, Items.phaseFabric, 325, EItems.protactinium, 225, Items.plastanium, 800));
+			ammo(
+					Items.scrap, new BasicBulletType(7f, 200){{
+						hitSize = 4;
+						width = 16f;
+						height = 18f;
+						shootEffect = Fx.shootBig;
+						pierceCap = 5;
+						pierceBuilding = true;
+						knockback = 0.7f;
+						lifetime = 35f;
+						splashDamage = 50;
+						splashDamageRadius = 5;
+						ammoMultiplier = 2;
+					}},
+					Items.sporePod, new BasicBulletType(7f, 100){{
+						hitSize = 4;
+						width = 8f;
+						height = 22f;
+						shootEffect = Fx.shootBig;
+						frontColor = Pal.reactorPurple;
+						backColor = Pal.reactorPurple2;
+						status = StatusEffects.burning;
+						hitEffect = new MultiEffect(Fx.hitBulletBig, Fx.fireHit);
+						makeFire = true;
+						pierceCap = 3;
+						pierceBuilding = true;
+						knockback = 0.4f;
+						ammoMultiplier = 3;
+						splashDamage = 120f;
+						splashDamageRadius = 25f;
+						lifetime = 35f;
+					}}
+			);
+			reload = 7.5f;
+			recoilTime = reload * 2f;
+			coolantMultiplier = 0.5f;
+			ammoUseEffect = Fx.casing3;
+			range = 245f;
+			inaccuracy = 0f;
+			recoil = 3f;
+			shoot = new ShootSpread(5, 1f);
+			shake = 2f;
+			size = 5;
+			shootCone = 28f;
+			shootSound = Sounds.shootBig;
+
+			scaledHealth = 200;
+			coolant = consumeCoolant(1.2f);
+
 		}};
 
 
