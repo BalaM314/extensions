@@ -122,7 +122,7 @@ public class EBlocks implements ContentList {
 			size = 3;
 			hasPower = true;
 
-			explosionRadius = 4;
+			explosionRadius = 6;
 			explosionCauserName = "radiation";
 
 			ambientSound = Sounds.pulse;
@@ -141,14 +141,14 @@ public class EBlocks implements ContentList {
 			size = 4;
 			hasPower = true;
 
-			explosionRadius = 7;
+			explosionRadius = 9;
 			explosionCauserName = "heat";
 			explosionBarColor = Color.red;
 
 			ambientSound = Sounds.electricHum;
 			ambientSoundVolume = 0.02f;
 
-			consumeItems(with(Items.surgeAlloy, 2, EItems.iridium, 5, EItems.protactinium, 1, Items.sporePod, 10));
+			consumeItems(with(Items.surgeAlloy, 2, EItems.iridium, 5, EItems.protactinium, 1, Items.sporePod, 1));
 			antiDetonationCons = consumeLiquid(ELiquids.advancedCoolant, 9f / 60f);
 			consumePower(32f);
 			itemCapacity = 20;
@@ -188,6 +188,7 @@ public class EBlocks implements ContentList {
 		}};
 
 		iridiumConveyor = new Conveyor("iridium-conveyor"){{
+			//TODO should this even exist? High speed conveyors aren't stable especially if overdrived
 			requirements(Category.distribution, with(EItems.iridium, 1, Items.titanium, 1, Items.metaglass, 1));
 			health = 300;
 			speed = 0.26f;
@@ -226,8 +227,10 @@ public class EBlocks implements ContentList {
 
 		overchargedShockMine = new ShockMine("overcharged-shock-mine"){{
 			requirements(Category.effect, with(Items.surgeAlloy, 99, Items.copper, 49, Items.silicon, 99, EItems.radiantAlloy, 5));
-			damage = 2;
 			size = 2;
+			tendrils = 18;
+			length = 13;
+			damage = 100;
 			//TODO change this to an EffectField class and make it damage all enemies within 10 blocks
 		}};
 
@@ -549,7 +552,7 @@ public class EBlocks implements ContentList {
 			cooldownLiquid = 2.0f;
 			cooldownBrokenBase = 1.0f;
 
-			consumeItem(EItems.protactinium).boost();
+			itemConsumer = consumeItem(EItems.protactinium).boost();
 			consumePower(40f);
 			//TODO nerf shield health and block crash damage
 		}};
@@ -559,10 +562,12 @@ public class EBlocks implements ContentList {
 			reload = 120f;
 			range = 165f;
 			phaseRangeBoost = 20f;
-			healPercent = 4.5f;
-			phaseBoost = 4.0f;
+			healPercent = 3.5f;
+			phaseBoost = 4.5f;
 			health = 1500;
 
+			useTime = 350f;
+			consumeItems(with(EItems.protactinium, 1, Items.phaseFabric, 2)).boost();
 			consumePower(15f);
 		}};
 		radiantDome = new OverdriveProjector("radiant-dome"){{
@@ -577,7 +582,7 @@ public class EBlocks implements ContentList {
 			consumeItems(with(EItems.radiantAlloy, 1, EItems.protactinium, 2, Items.phaseFabric, 5));
 		}};
 		coreNexus = new CoreBlock("core-nexus"){{
-			requirements(Category.effect, with(Items.surgeAlloy, 1000, Items.plastanium, 1500, EItems.iridium, 3000, Items.metaglass, 8000, Items.silicon, 13000));
+			requirements(Category.effect, with(Items.surgeAlloy, 1000, Items.plastanium, 1500, EItems.iridium, 3000, Items.metaglass, 8000, Items.copper, 14000, Items.silicon, 13000));
 
 			unitType = UnitTypes.gamma;//TODO delta
 			health = 9000;
@@ -590,7 +595,7 @@ public class EBlocks implements ContentList {
 			//TODO mend effect
 		}};
 		coreRadiant = new CoreBlock("core-radiant"){{
-			requirements(Category.effect, with(EItems.radiantAlloy, 2000, EItems.protactinium, 4000, Items.phaseFabric, 5500, EItems.iridium, 11000, Items.silicon, 20000));
+			requirements(Category.effect, with(EItems.radiantAlloy, 2000, EItems.protactinium, 4000, Items.phaseFabric, 5500, EItems.iridium, 11000, Items.copper, 18000, Items.silicon, 20000));
 
 			unitType = UnitTypes.gamma;//TODO epsilon
 			health = 36000;
@@ -614,7 +619,6 @@ public class EBlocks implements ContentList {
 			size = 1;
 			maxNodes = 20;
 			laserRange = 15f;
-			consumeItem(EItems.protactinium).boost();
 		}};
 		radiantNode = new PowerNode("radiant-node"){{
 			requirements(Category.power, with(EItems.radiantAlloy, 25, Items.surgeAlloy, 50, EItems.protactinium, 75, Items.plastanium, 100, Items.silicon, 150));
@@ -691,7 +695,7 @@ public class EBlocks implements ContentList {
 
 			size = 3;
 			consumePower(10801f / 60f);
-			consumeItems(with(EItems.radiantAlloy, 2));
+			consumeItems(with(EItems.radiantAlloy, 1000));
 			consumeLiquid(Liquids.oil, 0.1f);
 
 			constructTime = 60f * 60f * 12;
