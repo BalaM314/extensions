@@ -33,12 +33,12 @@ public class EUnitTypes implements ContentList {
 			hitSize = 9;
 			itemCapacity = 100;
 			constructor = UnitEntity::create;
-			shootCone = 
+			outlines = false;
 
 			weapons.add(new Weapon(){{
 				y = 0f;
 				x = 0f;
-				reload = 20f;
+				reload = 10f;
 				ejectEffect = Fx.casing1;
 				shootCone = 90f;
 				bullet = new BasicBulletType(7.5f, 10){{
@@ -50,6 +50,7 @@ public class EUnitTypes implements ContentList {
 				}};
 				shootSound = Sounds.pew;
 				shoot = new ShootSpread(20, 2);
+				mirror = false;
 			}});
 		}};
 	}

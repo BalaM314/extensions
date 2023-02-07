@@ -693,16 +693,16 @@ public class EBlocks implements ContentList {
 		sussifyingReconstructor = new Reconstructor("sussifying-reconstructor"){{
 			requirements(Category.units, with(EItems.radiantAlloy, 50, EItems.protactinium, 300, Items.surgeAlloy, 320, EItems.iridium, 400, Items.phaseFabric, 350, Items.silicon, 1200, Items.thorium, 1200));
 
-			size = 3;
+			size = 6;
 			consumePower(10801f / 60f);
-			consumeItems(with(EItems.radiantAlloy, 1000));
+			consumeItems(with(EItems.radiantAlloy, 600, Items.sporePod, 1000));
 			consumeLiquid(Liquids.oil, 0.1f);
 
 			constructTime = 60f * 60f * 12;
-			liquidCapacity = 1440f;
+			liquidCapacity = 120f;
 
 			upgrades.addAll(
-				new UnitType[]{UnitTypes.eclipse, UnitTypes.flare}//TODO flarogus
+				new UnitType[]{UnitTypes.eclipse, EUnitTypes.flarogus}
 			);
 		}};
 
