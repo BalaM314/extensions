@@ -39,7 +39,12 @@ public class DetonatingCrafter extends GenericCrafter {
 
 	public DetonatingCrafter(String name){
 		super(name);
+	}
+
+	@Override
+	public void init(){
 		this.antiDetonationCons.optional(true, false);
+		super.init();
 	}
 
 	@Override
