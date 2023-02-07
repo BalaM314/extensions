@@ -35,7 +35,7 @@ public class Extensions extends Mod{
     public void loadContent(){
         util.log("Loading content.");
 
-        ContentList[] allContent = {new EItems(), new EStatusEffects(), new ELiquids(), new EBlocks()};
+        ContentList[] allContent = {new EItems(), new EStatusEffects(), new ELiquids(), new EUnitTypes(), new EBlocks()};
         for(ContentList list : allContent) {
             list.load();
             util.log("Loaded " + list.getClass().getName());
