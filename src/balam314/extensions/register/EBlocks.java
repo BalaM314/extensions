@@ -1,12 +1,17 @@
 package balam314.extensions.register;
 
 import arc.graphics.*;
+import arc.graphics.g2d.Fill;
+import arc.graphics.g2d.Lines;
 import arc.math.Mathf;
 import arc.struct.EnumSet;
+import arc.struct.ObjectMap;
+import balam314.extensions.world.blocks.defense.turrets.AdvancedContinuousLaserTurret;
 import balam314.extensions.world.blocks.defense.turrets.AdvancedPointDefenseTurret;
 import balam314.extensions.world.blocks.production.BoostableCrafter;
 import balam314.extensions.world.blocks.production.DetonatingCrafter;
 import mindustry.content.*;
+import mindustry.entities.Effect;
 import mindustry.entities.bullet.*;
 import mindustry.entities.effect.MultiEffect;
 import mindustry.entities.pattern.*;
@@ -42,6 +47,9 @@ import mindustry.world.draw.DrawRegion;
 import mindustry.world.meta.BlockFlag;
 import mindustry.world.meta.Env;
 
+import static arc.graphics.g2d.Draw.color;
+import static arc.graphics.g2d.Lines.stroke;
+import static arc.math.Angles.randLenVectors;
 import static mindustry.type.ItemStack.with;
 
 public class EBlocks implements ContentList {
@@ -365,23 +373,32 @@ public class EBlocks implements ContentList {
 			reload = 4f;
 			envEnabled |= Env.space;
 		}};
-		electron = new LaserTurret("electron"){{
-			//this is supposed to be a continuous meltdown but I ran into a bunch of issues making that so now it's just a better meltdown
-			//TODO AdvancedLaserTurret: shoots continously, and optionally takes damage if coolant runs out
+		electron = new AdvancedContinuousLaserTurret("electron"){{
 			requirements(Category.turret, with(Items.copper, 1600, Items.silicon, 700, EItems.iridium, 550, Items.surgeAlloy, 425, EItems.protactinium, 200, Items.thorium, 800));
-			shootEffect = Fx.shootBigSmoke2;
+			shootEffect = Fx.none;
+			overheatEffect = new Effect(60f, e -> {
+				randLenVectors(e.id, 24, 1f + e.fin() * 56f, (x, y) -> {
+					float size = 5f + e.fout() * 12f;
+					color(Color.lightGray, Color.gray, e.fin());
+					Fill.circle(e.x + x, e.y + y, size/2f);
+				});
+			});
+
 			shootCone = 40f;
 			recoil = 4f;
 			size = 5;
 			shake = 2f;
 			range = 295f;
 			reload = 60f;
-			firingMoveFract = 0.5f;
-			shootDuration = 120f;
+			firingMoveFrac = 0.5f;
 			shootSound = Sounds.laserbig;
 			loopSound = Sounds.beam;
 			loopSoundVolume = 2f;
 			envEnabled |= Env.space;
+
+			shoot = new ShootPattern(){{
+				firstShotDelay = 15f;
+			}};
 
 			shootType = new ContinuousLaserBulletType(141){{
 				length = 300f;
@@ -395,11 +412,34 @@ public class EBlocks implements ContentList {
 				incendSpread = 5f;
 				incendAmount = 1;
 				ammoMultiplier = 1f;
+				chargeEffect = new Effect(15f, 100f, e -> {
+					color(Color.valueOf("cffff9"));
+					stroke(e.fin() * 2f);
+					Lines.circle(e.x, e.y, 4f + e.fout() * 100f);
+
+					Fill.circle(e.x, e.y, e.fin() * 20);
+
+					randLenVectors(e.id, 20, 40f * e.fout(), (x, y) -> {
+						Fill.circle(e.x + x, e.y + y, e.fin() * 5f);
+						Drawf.light(e.x + x, e.y + y, e.fin() * 15f, Pal.heal, 0.7f);
+					});
+
+					color();
+
+					Fill.circle(e.x, e.y, e.fin() * 10);
+					Drawf.light(e.x, e.y, e.fin() * 20f, Pal.heal, 0.7f);
+				}).followParent(true).rotWithParent(true);
 			}};
 
+			coolantTypes = ObjectMap.of(
+				ELiquids.advancedCoolant, 1.5f,
+				Liquids.cryofluid, 1.0f
+			);
+
+			liquidCapacity = 150f;
+			coolant = consume(new ConsumeLiquidFilter(liquid -> coolantTypes.get(liquid) != null, 1.5f));
+
 			scaledHealth = 250;
-			coolant = consume(new ConsumeLiquidFilter(liquid -> liquid == ELiquids.advancedCoolant, 2f));
-			//TODO maybe increase dps somehow with advanced coolant and make it also accept cryofluid?
 			consumePower(55f);
 		}};
 		muon = new ItemTurret("muon"){{
