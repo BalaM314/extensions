@@ -521,8 +521,8 @@ public class EBlocks implements ContentList {
 			ammo(
 					Items.scrap, new BasicBulletType(7f, 200){{
 						hitSize = 4;
-						width = 16f;
-						height = 18f;
+						width = 22f;
+						height = 28f;
 						shootEffect = Fx.shootBig;
 						pierceCap = 5;
 						pierceBuilding = true;
@@ -534,8 +534,8 @@ public class EBlocks implements ContentList {
 					}},
 					Items.sporePod, new BasicBulletType(7f, 100){{
 						hitSize = 4;
-						width = 8f;
-						height = 22f;
+						width = 15f;
+						height = 36f;
 						shootEffect = Fx.shootBig;
 						frontColor = Pal.reactorPurple;
 						backColor = Pal.reactorPurple2;
