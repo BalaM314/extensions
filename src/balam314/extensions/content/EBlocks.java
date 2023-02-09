@@ -383,11 +383,19 @@ public class EBlocks implements ContentList {
 
 			shootType = new ContinuousLaserBulletType(141){{
 				length = 300f;
-				hitEffect = Fx.hitMeltdown;
-				hitColor = Pal.meltdownHit;
+				hitEffect = new Effect(12, e -> {
+					Draw.color(Color.valueOf("a0ffff"));
+					Lines.stroke(e.fout() * 2f);
+
+					Angles.randLenVectors(e.id, 6, e.finpow() * 18f, (x, y) -> {
+						float ang = Mathf.angle(x, y);
+						Lines.lineAngle(e.x + x, e.y + y, ang, e.fout() * 4 + 1f);
+					});
+				});
+				hitColor = Color.valueOf("a0ffff");
 				status = StatusEffects.melting;
 				drawSize = 480f;
-				colors = new Color[]{Color.valueOf("cffff955"), Color.valueOf("cffff9aa"), Color.valueOf("cffff9"), Color.white};
+				colors = new Color[]{Color.valueOf("b0f0ff55"), Color.valueOf("b0f0ffaa"), Color.valueOf("b0f0ffff"), Color.white};
 
 				incendChance = 0.7f;
 				incendSpread = 5f;
@@ -396,19 +404,19 @@ public class EBlocks implements ContentList {
 				chargeEffect = new Effect(15f, 100f, e -> {
 					Draw.color(Color.valueOf("cffff9"));
 					Lines.stroke(e.fin() * 2f);
-					Lines.circle(e.x, e.y, 4f + e.fout() * 100f);
+					Lines.circle(e.x, e.y, 4f + e.fout() * 60f);
 
 					Fill.circle(e.x, e.y, e.fin() * 20);
 
 					Angles.randLenVectors(e.id, 20, 40f * e.fout(), (x, y) -> {
 						Fill.circle(e.x + x, e.y + y, e.fin() * 5f);
-						Drawf.light(e.x + x, e.y + y, e.fin() * 15f, Pal.heal, 0.7f);
+						Drawf.light(e.x + x, e.y + y, e.fin() * 15f, Color.valueOf("cffff9"), 0.7f);
 					});
 
 					Draw.color();
 
 					Fill.circle(e.x, e.y, e.fin() * 10);
-					Drawf.light(e.x, e.y, e.fin() * 20f, Pal.heal, 0.7f);
+					Drawf.light(e.x, e.y, e.fin() * 20f, Color.valueOf("cffff9"), 0.7f);
 				}).followParent(true).rotWithParent(true);
 			}};
 
