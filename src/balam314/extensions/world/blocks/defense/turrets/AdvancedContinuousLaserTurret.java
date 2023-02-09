@@ -29,11 +29,6 @@ public class AdvancedContinuousLaserTurret extends PowerTurret {
 	}
 
 	@Override
-	public void init() {
-		super.init();
-	}
-
-	@Override
 	public void setStats(){
 		super.setStats();
 

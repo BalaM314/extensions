@@ -165,7 +165,7 @@ public class EBlocks implements ContentList {
 		advancedCoolantMixer = new GenericCrafter("advanced-coolant-mixer"){{
 			requirements(Category.crafting, with(Items.metaglass, 95, Items.silicon, 150, EItems.iridium, 65, Items.titanium, 100));
 			outputLiquid = new LiquidStack(ELiquids.advancedCoolant, 0.2f);
-			craftTime = 60f;
+			craftTime = 30f;
 			size = 3;
 			hasPower = true;
 			hasItems = true;
@@ -177,7 +177,7 @@ public class EBlocks implements ContentList {
 
 			consumePower(5f);
 			consumeItem(EItems.iridium);
-			consumeLiquid(mindustry.content.Liquids.cryofluid, 0.5f);
+			consumeLiquid(mindustry.content.Liquids.cryofluid, 0.2f);
 		}};
 
 		impactPump = new Pump("impact-pump"){{
@@ -384,6 +384,7 @@ public class EBlocks implements ContentList {
 				});
 			});
 
+
 			shootCone = 40f;
 			recoil = 4f;
 			size = 5;
@@ -437,7 +438,7 @@ public class EBlocks implements ContentList {
 			);
 
 			liquidCapacity = 150f;
-			coolant = consume(new ConsumeLiquidFilter(liquid -> coolantTypes.get(liquid) != null, 1.5f));
+			coolant = consume(new ConsumeLiquidFilter(liquid -> coolantTypes.get(liquid) != null, 0.8f));
 
 			scaledHealth = 250;
 			consumePower(55f);
