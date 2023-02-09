@@ -119,30 +119,32 @@ public class EBlocks implements ContentList {
 			consumePower(15f);
 			itemCapacity = 30;
 		}};
-		fluxedOvercharger = new DetonatingCrafter("fluxed-overcharger"){{
-			requirements(Category.crafting, with(EItems.iridium, 150, Items.thorium, 165, Items.plastanium, 100, Items.silicon, 200, EItems.protactinium, 50));
+		fluxedOvercharger = new SelfDamagingCrafter("fluxed-overcharger"){{
+			requirements(Category.crafting, with(EItems.iridium, 250, Items.thorium, 165, Items.plastanium, 100, Items.silicon, 200, EItems.protactinium, 50));
 			craftEffect = Fx.lightning;
 			outputItem = new ItemStack(EItems.radiantAlloy, 1);
 			craftTime = 120f;
 			size = 4;
 			hasPower = true;
 
+			explodeOnDestruction = true;
+			explodeIfExternalDestruction = true;
 			explosionRadius = 9;
-			explosionCauserName = "heat";
-			explosionBarColor = Color.red;
+			explosionEffect = Fx.massiveExplosion;
+			health = 1240;
 
 			ambientSound = Sounds.electricHum;
 			ambientSoundVolume = 0.02f;
 
-			consumeItems(with(Items.surgeAlloy, 2, EItems.iridium, 5, EItems.protactinium, 1, Items.sporePod, 1));
-			antiDetonationCons = consumeLiquid(ELiquids.advancedCoolant, 9f / 60f);
+			consumeItems(with(Items.surgeAlloy, 2, EItems.iridium, 5, EItems.protactinium, 3, Items.sporePod, 1));
+			consumeLiquid(ELiquids.advancedCoolant, 18f / 60f);
 			consumePower(32f);
-			itemCapacity = 20;
+			itemCapacity = 30;
 			liquidCapacity = 90f;
 		}};
 		advancedCoolantMixer = new GenericCrafter("advanced-coolant-mixer"){{
 			requirements(Category.crafting, with(Items.metaglass, 95, Items.silicon, 150, EItems.iridium, 65, Items.titanium, 100));
-			outputLiquid = new LiquidStack(ELiquids.advancedCoolant, 0.2f);
+			outputLiquid = new LiquidStack(ELiquids.advancedCoolant, 0.4f);
 			craftTime = 30f;
 			size = 3;
 			hasPower = true;
@@ -155,7 +157,7 @@ public class EBlocks implements ContentList {
 
 			consumePower(5f);
 			consumeItem(EItems.iridium);
-			consumeLiquid(mindustry.content.Liquids.cryofluid, 0.2f);
+			consumeLiquid(mindustry.content.Liquids.cryofluid, 0.6f);
 		}};
 
 		impactPump = new Pump("impact-pump"){{
