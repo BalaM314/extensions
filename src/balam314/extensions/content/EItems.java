@@ -1,7 +1,7 @@
-package balam314.extensions.register;
+package balam314.extensions.content;
 
-import arc.graphics.Color;
-import mindustry.type.Item;
+import arc.graphics.*;
+import mindustry.type.*;
 
 public class EItems implements ContentList {
 	

@@ -1,55 +1,33 @@
-package balam314.extensions.register;
+package balam314.extensions.content;
 
 import arc.graphics.*;
-import arc.graphics.g2d.Fill;
-import arc.graphics.g2d.Lines;
-import arc.math.Mathf;
-import arc.struct.EnumSet;
-import arc.struct.ObjectMap;
-import balam314.extensions.world.blocks.defense.turrets.AdvancedContinuousLaserTurret;
-import balam314.extensions.world.blocks.defense.turrets.AdvancedPointDefenseTurret;
-import balam314.extensions.world.blocks.production.BoostableCrafter;
-import balam314.extensions.world.blocks.production.DetonatingCrafter;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.struct.*;
+import balam314.extensions.world.blocks.defense.turrets.*;
+import balam314.extensions.world.blocks.production.*;
 import mindustry.content.*;
-import mindustry.entities.Effect;
+import mindustry.entities.*;
 import mindustry.entities.bullet.*;
-import mindustry.entities.effect.MultiEffect;
+import mindustry.entities.effect.*;
 import mindustry.entities.pattern.*;
-import mindustry.gen.Sounds;
+import mindustry.gen.*;
 import mindustry.graphics.*;
-import mindustry.type.Category;
-import mindustry.type.ItemStack;
-import mindustry.type.LiquidStack;
-import mindustry.type.UnitType;
-import mindustry.world.Block;
+import mindustry.type.*;
+import mindustry.world.*;
 import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.defense.turrets.*;
-import mindustry.world.blocks.distribution.Conveyor;
-import mindustry.world.blocks.distribution.Router;
-import mindustry.world.blocks.environment.OreBlock;
-import mindustry.world.blocks.liquid.LiquidRouter;
-import mindustry.world.blocks.power.Battery;
-import mindustry.world.blocks.power.NuclearReactor;
-import mindustry.world.blocks.power.PowerNode;
-import mindustry.world.blocks.power.SolarGenerator;
-import mindustry.world.blocks.production.Drill;
-import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.blocks.production.Pump;
-import mindustry.world.blocks.storage.CoreBlock;
-import mindustry.world.blocks.storage.StorageBlock;
-import mindustry.world.blocks.units.Reconstructor;
-import mindustry.world.blocks.units.RepairTower;
-import mindustry.world.consumers.ConsumeLiquidFilter;
-import mindustry.world.draw.DrawDefault;
-import mindustry.world.draw.DrawLiquidTile;
-import mindustry.world.draw.DrawMulti;
-import mindustry.world.draw.DrawRegion;
-import mindustry.world.meta.BlockFlag;
-import mindustry.world.meta.Env;
+import mindustry.world.blocks.distribution.*;
+import mindustry.world.blocks.environment.*;
+import mindustry.world.blocks.liquid.*;
+import mindustry.world.blocks.power.*;
+import mindustry.world.blocks.production.*;
+import mindustry.world.blocks.storage.*;
+import mindustry.world.blocks.units.*;
+import mindustry.world.consumers.*;
+import mindustry.world.draw.*;
+import mindustry.world.meta.*;
 
-import static arc.graphics.g2d.Draw.color;
-import static arc.graphics.g2d.Lines.stroke;
-import static arc.math.Angles.randLenVectors;
 import static mindustry.type.ItemStack.with;
 
 public class EBlocks implements ContentList {
@@ -377,9 +355,9 @@ public class EBlocks implements ContentList {
 			requirements(Category.turret, with(Items.copper, 1600, Items.silicon, 700, EItems.iridium, 550, Items.surgeAlloy, 425, EItems.protactinium, 200, Items.thorium, 800));
 			shootEffect = Fx.none;
 			overheatEffect = new Effect(60f, e -> {
-				randLenVectors(e.id, 24, 1f + e.fin() * 56f, (x, y) -> {
+				Angles.randLenVectors(e.id, 24, 1f + e.fin() * 56f, (x, y) -> {
 					float size = 5f + e.fout() * 12f;
-					color(Color.lightGray, Color.gray, e.fin());
+					Draw.color(Color.lightGray, Color.gray, e.fin());
 					Fill.circle(e.x + x, e.y + y, size/2f);
 				});
 			});
@@ -414,18 +392,18 @@ public class EBlocks implements ContentList {
 				incendAmount = 1;
 				ammoMultiplier = 1f;
 				chargeEffect = new Effect(15f, 100f, e -> {
-					color(Color.valueOf("cffff9"));
-					stroke(e.fin() * 2f);
+					Draw.color(Color.valueOf("cffff9"));
+					Lines.stroke(e.fin() * 2f);
 					Lines.circle(e.x, e.y, 4f + e.fout() * 100f);
 
 					Fill.circle(e.x, e.y, e.fin() * 20);
 
-					randLenVectors(e.id, 20, 40f * e.fout(), (x, y) -> {
+					Angles.randLenVectors(e.id, 20, 40f * e.fout(), (x, y) -> {
 						Fill.circle(e.x + x, e.y + y, e.fin() * 5f);
 						Drawf.light(e.x + x, e.y + y, e.fin() * 15f, Pal.heal, 0.7f);
 					});
 
-					color();
+					Draw.color();
 
 					Fill.circle(e.x, e.y, e.fin() * 10);
 					Drawf.light(e.x, e.y, e.fin() * 20f, Pal.heal, 0.7f);

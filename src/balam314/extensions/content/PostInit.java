@@ -1,14 +1,10 @@
-package balam314.extensions.register;
+package balam314.extensions.content;
 
-import mindustry.entities.bullet.LiquidBulletType;
-import mindustry.world.blocks.defense.turrets.LiquidTurret;
+import mindustry.entities.bullet.*;
+import mindustry.world.blocks.defense.turrets.*;
 
+import static balam314.extensions.content.ELiquids.*;
 import static mindustry.content.Blocks.*;
-import static mindustry.content.Items.*;
-import static mindustry.content.Liquids.*;
-import static balam314.extensions.register.EBlocks.*;
-import static balam314.extensions.register.EItems.*;
-import static balam314.extensions.register.ELiquids.*;
 
 /**Contains code that must be run after initialization, such as updating ammo types for vanilla turrets.  */
 public class PostInit {

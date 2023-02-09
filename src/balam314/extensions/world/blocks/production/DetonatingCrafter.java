@@ -1,19 +1,16 @@
 package balam314.extensions.world.blocks.production;
 
-import arc.audio.Sound;
-import arc.graphics.Color;
-import arc.math.Mathf;
-import mindustry.Vars;
-import mindustry.content.Fx;
-import mindustry.entities.Damage;
-import mindustry.entities.Effect;
-import mindustry.gen.Sounds;
-import mindustry.graphics.Pal;
-import mindustry.ui.Bar;
-import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.consumers.Consume;
+import arc.audio.*;
+import arc.graphics.*;
+import mindustry.*;
+import mindustry.content.*;
+import mindustry.entities.*;
+import mindustry.gen.*;
+import mindustry.ui.*;
+import mindustry.world.blocks.production.*;
+import mindustry.world.consumers.*;
 
-import static mindustry.Vars.tilesize;
+import static mindustry.Vars.*;
 
 
 /**A crafter that detonates if it has insufficient supply of an ingredient. */

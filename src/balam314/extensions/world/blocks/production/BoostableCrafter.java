@@ -1,21 +1,8 @@
 package balam314.extensions.world.blocks.production;
 
-import arc.util.Strings;
-import balam314.extensions.register.EItems;
-import balam314.extensions.util.Util;
-import mindustry.content.Items;
-import mindustry.gen.Building;
-import mindustry.type.Item;
-import mindustry.world.blocks.production.GenericCrafter;
-import mindustry.world.consumers.Consume;
-import mindustry.world.consumers.ConsumeItems;
-import mindustry.world.meta.Stat;
-import mindustry.world.meta.StatUnit;
-
-import java.util.Arrays;
-
-import static balam314.extensions.Extensions.util;
-import static mindustry.type.ItemStack.with;
+import mindustry.world.blocks.production.*;
+import mindustry.world.consumers.*;
+import mindustry.world.meta.*;
 
 /** A crafter that can be boosted by optional consumers. */
 public class BoostableCrafter extends GenericCrafter {

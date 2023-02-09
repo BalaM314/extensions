@@ -1,8 +1,7 @@
-package balam314.extensions.register;
+package balam314.extensions.content;
 
-import arc.graphics.Color;
-import mindustry.content.StatusEffects;
-import mindustry.type.Liquid;
+import arc.graphics.*;
+import mindustry.type.*;
 
 public class ELiquids implements ContentList {
 

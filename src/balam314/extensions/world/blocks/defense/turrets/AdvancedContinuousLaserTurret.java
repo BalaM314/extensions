@@ -1,16 +1,15 @@
 package balam314.extensions.world.blocks.defense.turrets;
 
-import arc.graphics.Color;
 import arc.math.*;
 import arc.struct.*;
 import arc.util.*;
-import balam314.extensions.world.meta.EStatValues;
-import mindustry.content.Fx;
-import mindustry.entities.Effect;
+import balam314.extensions.world.meta.*;
+import mindustry.content.*;
+import mindustry.entities.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.type.*;
-import mindustry.world.blocks.defense.turrets.PowerTurret;
+import mindustry.world.blocks.defense.turrets.*;
 import mindustry.world.consumers.*;
 import mindustry.world.meta.*;
 

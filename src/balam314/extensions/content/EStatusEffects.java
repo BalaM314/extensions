@@ -1,12 +1,12 @@
-package balam314.extensions.register;
+package balam314.extensions.content;
 
-import arc.Events;
-import arc.graphics.Color;
-import mindustry.content.Fx;
-import mindustry.game.EventType;
-import mindustry.type.StatusEffect;
+import arc.*;
+import arc.graphics.*;
+import mindustry.content.*;
+import mindustry.game.*;
+import mindustry.type.*;
 
-import static mindustry.Vars.state;
+import static mindustry.Vars.*;
 import static mindustry.content.StatusEffects.*;
 
 public class EStatusEffects implements ContentList {

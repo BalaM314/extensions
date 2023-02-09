@@ -1,11 +1,10 @@
 package balam314.extensions.util;
 
-import arc.Core;
-import arc.graphics.g2d.TextureAtlas;
-import arc.util.Log;
-import arc.util.Nullable;
-import balam314.extensions.Extensions;
-import mindustry.Vars;
+import arc.*;
+import arc.graphics.g2d.*;
+import arc.util.*;
+import balam314.extensions.*;
+import mindustry.*;
 
 public class Util {
     private int spammyDebugTimer = 0;

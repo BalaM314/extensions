@@ -1,4 +1,4 @@
-package balam314.extensions.register;
+package balam314.extensions.content;
 
 import arc.struct.*;
 import mindustry.content.*;
@@ -6,7 +6,6 @@ import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
 import mindustry.gen.*;
 import mindustry.type.*;
-import mindustry.type.UnitType.*;
 import mindustry.world.meta.*;
 
 public class EUnitTypes implements ContentList {

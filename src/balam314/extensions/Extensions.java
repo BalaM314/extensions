@@ -3,7 +3,7 @@ package balam314.extensions;
 import arc.Events;
 import arc.util.Log;
 import arc.util.Log.LogLevel;
-import balam314.extensions.register.*;
+import balam314.extensions.content.*;
 import balam314.extensions.util.Mode;
 import balam314.extensions.util.Util;
 import mindustry.Vars;
