@@ -436,7 +436,22 @@ public class EBlocks implements ContentList {
 
 			ammo(
 				EItems.iridium, new ArtilleryBulletType(12.5f, 800, "shell"){{
-					shootEffect = Fx.instShoot;
+					shootEffect = new Effect(24f, e -> {
+						e.scaled(10f, b -> {
+							Draw.color(Color.white, Color.valueOf("eedddd"), b.fin());
+							Lines.stroke(b.fout() * 3f + 0.2f);
+							Lines.circle(b.x, b.y, b.fin() * 50f);
+						});
+
+						Draw.color(Color.valueOf("eedddd"));
+
+						for(int i : Mathf.signs){
+							Drawf.tri(e.x, e.y, 13f * e.fout(), 85f, e.rotation + 90f * i);
+							Drawf.tri(e.x, e.y, 13f * e.fout(), 50f, e.rotation + 20f * i);
+						}
+
+						Drawf.light(e.x, e.y, 180f, Color.valueOf("eedddd"), 0.9f * e.fout());
+					});
 					smokeEffect = Fx.smokeCloud;
 					hitEffect = Fx.instHit;
 
@@ -462,7 +477,22 @@ public class EBlocks implements ContentList {
 					buildingDamageMultiplier = 0.1f;
 				}},
 				Items.blastCompound, new ArtilleryBulletType(12.5f, 300, "shell"){{
-					shootEffect = Fx.instShoot;
+					shootEffect = new Effect(24f, e -> {
+						e.scaled(10f, b -> {
+							Draw.color(Color.white, Color.valueOf("eedddd"), b.fin());
+							Lines.stroke(b.fout() * 3f + 0.2f);
+							Lines.circle(b.x, b.y, b.fin() * 50f);
+						});
+
+						Draw.color(Color.valueOf("eedddd"));
+
+						for(int i : Mathf.signs){
+							Drawf.tri(e.x, e.y, 13f * e.fout(), 85f, e.rotation + 90f * i);
+							Drawf.tri(e.x, e.y, 13f * e.fout(), 50f, e.rotation + 20f * i);
+						}
+
+						Drawf.light(e.x, e.y, 180f, Color.valueOf("eedddd"), 0.9f * e.fout());
+					});
 					smokeEffect = Fx.smokeCloud;
 					hitEffect = Fx.instHit;
 
@@ -483,7 +513,20 @@ public class EBlocks implements ContentList {
 					trailWidth = 3.35f;
 					trailSinScl = 2.5f;
 					trailSinMag = 0.5f;
-					trailEffect = Fx.instTrail;
+					trailEffect = new Effect(30, e -> {
+						for(int i = 0; i < 2; i++){
+							Draw.color(i == 0 ? Color.valueOf("eedddd") : Color.valueOf("ffeeee"));
+
+							float m = i == 0 ? 1f : 0.5f;
+
+							float rot = e.rotation + 180f;
+							float w = 15f * e.fout() * m;
+							Drawf.tri(e.x, e.y, w, (30f + Mathf.randomSeedRange(e.id, 15f)) * m, rot);
+							Drawf.tri(e.x, e.y, w, 10f * m, rot + 180f);
+						}
+
+						Drawf.light(e.x, e.y, 60f, Color.valueOf("eedddd"), 0.6f * e.fout());
+					});
 					despawnShake = 7f;
 
 					trailInterp = v -> Math.max(Mathf.slope(v), 0.8f);
@@ -494,6 +537,9 @@ public class EBlocks implements ContentList {
 			);
 
 			shootSound = Sounds.mediumCannon;
+			shoot = new ShootAlternate(16){{
+				shots = 2;
+			}};
 			ammoPerShot = 4;
 			maxAmmo = ammoPerShot * 3;
 			targetAir = false;
