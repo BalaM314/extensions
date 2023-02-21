@@ -362,7 +362,7 @@ public class EBlocks implements ContentList {
 					width = height = 16f;
 					collidesTiles = false;
 					splashDamageRadius = 24f;
-					splashDamage = 100f;
+					splashDamage = 60f;
 					reloadMultiplier = 1.2f;
 					ammoMultiplier = 2f;
 					homingPower = 0.08f;
@@ -376,7 +376,7 @@ public class EBlocks implements ContentList {
 					collidesTiles = false;
 					ammoMultiplier = 5f;
 					splashDamageRadius = 45f;
-					splashDamage = 220f;
+					splashDamage = 130f;
 					backColor = Pal.missileYellowBack;
 					frontColor = Pal.missileYellow;
 
@@ -389,7 +389,7 @@ public class EBlocks implements ContentList {
 					width = height = 18f;
 					collidesTiles = false;
 					splashDamageRadius = 38f;
-					splashDamage = 180f;
+					splashDamage = 108f;
 					ammoMultiplier = 5f;
 					fragBullet = new BasicBulletType(2.5f, 10, "bullet"){{
 						width = 10f;
@@ -435,7 +435,7 @@ public class EBlocks implements ContentList {
 					collidesTiles = false;
 					ammoMultiplier = 9f;
 					splashDamageRadius = 45f;
-					splashDamage = 230f;
+					splashDamage = 140f;
 					backColor = Color.valueOf("acdd84");
 					frontColor = Color.valueOf("d8ffb0");
 
@@ -666,7 +666,9 @@ public class EBlocks implements ContentList {
 
 			outlineColor = Pal.darkOutline;
 
-			consumeLiquid(Liquids.water, 5f / 60f);
+			consumeLiquid(Liquids.water, 120f / 60f);
+			consumePower(2180f / 60f);
+
 
 			scaledHealth = 180;
 			range = 450f;
@@ -866,15 +868,15 @@ public class EBlocks implements ContentList {
 			liquidCapacity = 1440f;
 
 			upgrades.addAll(
-					new UnitType[]{UnitTypes.toxopid, UnitTypes.flare},
-					new UnitType[]{UnitTypes.eclipse, UnitTypes.flare},
-					new UnitType[]{UnitTypes.reign, UnitTypes.flare},
-					new UnitType[]{UnitTypes.omura, UnitTypes.flare},
-					new UnitType[]{UnitTypes.oct, UnitTypes.flare},
-					new UnitType[]{UnitTypes.corvus, UnitTypes.flare},
-					new UnitType[]{UnitTypes.navanax, UnitTypes.flare}
+					// new UnitType[]{UnitTypes.reign, EUnitTypes.dynasty},
+					// new UnitType[]{UnitTypes.corvus, EUnitTypes.morphnus},
+					// new UnitType[]{UnitTypes.toxopid, EUnitTypes.macrinus},
+					// new UnitType[]{UnitTypes.eclipse, EUnitTypes.blackout},
+					// new UnitType[]{UnitTypes.omura, EUnitTypes.musculus},
+					// new UnitType[]{UnitTypes.oct, EUnitTypes.hexadeca},
+					// new UnitType[]{UnitTypes.navanax, EUnitTypes.syrinx}
+			//TODO uncomment once the units are ready
 			);
-			//TODO t6 units instead of flare
 		}};
 		sussifyingReconstructor = new Reconstructor("sussifying-reconstructor"){{
 			requirements(Category.units, with(EItems.radiantAlloy, 50, EItems.protactinium, 300, Items.surgeAlloy, 320, EItems.iridium, 400, Items.phaseFabric, 350, Items.silicon, 1200, Items.thorium, 1200));
