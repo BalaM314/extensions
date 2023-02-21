@@ -44,7 +44,7 @@ public class EBlocks implements ContentList {
 
 	iridiumWall, iridiumWallLarge, radiantWall, radiantWallLarge, radiantWallHuge,
 
-	surgeDuo, riptide, ray, electron, muon, tauon, neutrino, radiance, overchargedShockMine,
+	surgeDuo, riptide, ray, fallout, electron, muon, tauon, neutrino, radiance, overchargedShockMine,
 
 	radiantShield, protactiniumMender, radiantDome, coreNexus, coreRadiant, crypt,
 
@@ -352,6 +352,117 @@ public class EBlocks implements ContentList {
 			bulletDamage = 65f;
 			reload = 4f;
 			envEnabled |= Env.space;
+		}};
+		fallout = new ItemTurret("fallout"){{
+			requirements(Category.turret, with(Items.copper, 850, Items.graphite, 600, Items.thorium, 400, Items.surgeAlloy, 100, EItems.iridium, 210, Items.plastanium, 260));
+			ammo(
+				Items.silicon, new ArtilleryBulletType(5f, 40){{
+					knockback = 1.2f;
+					lifetime = 80f;
+					width = height = 16f;
+					collidesTiles = false;
+					splashDamageRadius = 24f;
+					splashDamage = 100f;
+					reloadMultiplier = 1.2f;
+					ammoMultiplier = 2f;
+					homingPower = 0.08f;
+					homingRange = 50f;
+				}},
+				Items.blastCompound, new ArtilleryBulletType(3.6f, 40, "shell"){{
+					hitEffect = Fx.blastExplosion;
+					knockback = 1.8f;
+					lifetime = 80f;
+					width = height = 20f;
+					collidesTiles = false;
+					ammoMultiplier = 5f;
+					splashDamageRadius = 45f;
+					splashDamage = 220f;
+					backColor = Pal.missileYellowBack;
+					frontColor = Pal.missileYellow;
+
+					status = StatusEffects.blasted;
+				}},
+				Items.plastanium, new ArtilleryBulletType(5.8f, 40, "shell"){{
+					hitEffect = Fx.plasticExplosion;
+					knockback = 1.2f;
+					lifetime = 80f;
+					width = height = 18f;
+					collidesTiles = false;
+					splashDamageRadius = 38f;
+					splashDamage = 180f;
+					ammoMultiplier = 5f;
+					fragBullet = new BasicBulletType(2.5f, 10, "bullet"){{
+						width = 10f;
+						height = 12f;
+						shrinkY = 1f;
+						lifetime = 15f;
+						backColor = Pal.plastaniumBack;
+						frontColor = Pal.plastaniumFront;
+						despawnEffect = Fx.none;
+						collidesAir = false;
+					}};
+					fragBullets = 10;
+					backColor = Pal.plastaniumBack;
+					frontColor = Pal.plastaniumFront;
+				}},
+				EItems.protactinium, new ArtilleryBulletType(6f, 40, "shell"){{
+					hitEffect = new Effect(22, e -> {
+						Draw.color(Color.valueOf("d8ffb0"));
+
+						e.scaled(6, i -> {
+							Lines.stroke(3f * i.fout());
+							Lines.circle(e.x, e.y, 3f + i.fin() * 15f);
+						});
+
+						Draw.color(Color.gray);
+
+						Angles.randLenVectors(e.id, 5, 2f + 23f * e.finpow(), (x, y) -> {
+							Fill.circle(e.x + x, e.y + y, e.fout() * 4f + 0.5f);
+						});
+
+						Draw.color(Color.valueOf("acdd84"));
+						Lines.stroke(e.fout());
+
+						Angles.randLenVectors(e.id + 1, 4, 1f + 23f * e.finpow(), (x, y) -> {
+							Lines.lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1f + e.fout() * 3f);
+						});
+
+						Drawf.light(e.x, e.y, 45f, Color.valueOf("acdd84"), 0.8f * e.fout());
+					});
+					knockback = 1.6f;
+					lifetime = 80f;
+					width = height = 21f;
+					collidesTiles = false;
+					ammoMultiplier = 9f;
+					splashDamageRadius = 45f;
+					splashDamage = 230f;
+					backColor = Color.valueOf("acdd84");
+					frontColor = Color.valueOf("d8ffb0");
+
+					status = EStatusEffects.irradiated;
+				}}
+			);
+
+			targetAir = false;
+			size = 4;
+			shoot.shots = 9;
+			inaccuracy = 15f;
+			reload = 60f;
+			ammoEjectBack = 5f;
+			ammoUseEffect = Fx.casing3Double;
+			ammoPerShot = 3;
+			velocityRnd = 0.2f;
+			recoil = 7f;
+			shake = 3f;
+			range = 380f;
+			minRange = 30f;
+			coolant = consumeCoolant(0.75f);
+			coolantMultiplier = 1.25f;
+			consumePower(2.5f);
+
+			scaledHealth = 190;
+			shootSound = Sounds.artillery;
+			limitRange(24f);
 		}};
 		electron = new AdvancedContinuousLaserTurret("electron"){{
 			requirements(Category.turret, with(Items.copper, 1600, Items.silicon, 700, EItems.iridium, 550, Items.surgeAlloy, 425, EItems.protactinium, 200, Items.thorium, 800));
