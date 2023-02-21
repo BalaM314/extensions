@@ -703,7 +703,7 @@ public class EBlocks implements ContentList {
 			schematicPriority = -15;
 		}};
 		reinforcedBattery = new Battery("reinforced-battery"){{
-			requirements(Category.power, with(EItems.iridium, 100, Items.titanium, 125, Items.lead, 250, Items.silicon, 200));
+			requirements(Category.power, with(EItems.iridium, 100, Items.plastanium, 125, Items.lead, 250, Items.silicon, 200));
 			size = 4;
 			consumePowerBuffered(200000f);
 			baseExplosiveness = 0f;
