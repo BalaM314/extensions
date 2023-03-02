@@ -64,8 +64,8 @@ public class EBlocks implements ContentList {
 		}};
 
 		impactDrill = new Drill("impact-drill"){{
-			requirements(Category.production, with(EItems.iridium, 65, Items.silicon, 120, Items.titanium, 100, Items.thorium, 150));
-			drillTime = 240;
+			requirements(Category.production, with(EItems.iridium, 65, Items.silicon, 120, Items.titanium, 100, Items.thorium, 150, Items.plastanium, 85));
+			drillTime = 237.81f;
 			size = 5;
 			drawRim = true;
 			hasPower = true;
@@ -79,9 +79,10 @@ public class EBlocks implements ContentList {
 
 			//specific value for funny number
 			liquidBoostIntensity = 1.7733f;
+			liquidCapacity = 8f;
 
 			consumePower(8f);
-			consumeLiquid(mindustry.content.Liquids.cryofluid, 0.1f).boost();
+			consumeLiquid(mindustry.content.Liquids.water, 0.18f).boost();
 		}};
 		quadWeaver = new BoostableCrafter("quad-weaver"){{
 			requirements(Category.crafting, with(EItems.protactinium, 50, EItems.iridium, 80, Items.silicon, 160, Items.lead, 210, Items.thorium, 175));
