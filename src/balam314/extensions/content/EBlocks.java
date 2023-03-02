@@ -162,7 +162,7 @@ public class EBlocks implements ContentList {
 
 		impactPump = new Pump("impact-pump"){{
 			requirements(Category.liquid, with(Items.titanium, 100, Items.metaglass, 120, Items.silicon, 150, Items.thorium, 50, EItems.iridium, 35));
-			pumpAmount = 0.35f;
+			pumpAmount = 0.26f;
 			consumePower(5f);
 			liquidCapacity = 100f;
 			hasPower = true;
