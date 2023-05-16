@@ -781,7 +781,6 @@ public class EBlocks implements ContentList {
 
 			unitCapModifier = 36;
 			researchCostMultiplier = 0.06f;
-			//TODO mend effect
 		}};
 		coreRadiant = new CoreBlock("core-radiant"){{
 			requirements(Category.effect, with(EItems.radiantAlloy, 2000, EItems.protactinium, 4000, Items.phaseFabric, 5500, EItems.iridium, 11000, Items.copper, 18000, Items.silicon, 20000));
