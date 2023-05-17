@@ -9,7 +9,7 @@ public class ESectorPresets implements ContentList {
 	@Override
 	public void load(){
 		meteor = new SectorPreset("meteor", serpulo, 120){{
-			captureWave = 50;
+			captureWave = 51;
 			difficulty = 9;
 		}};
 	}
