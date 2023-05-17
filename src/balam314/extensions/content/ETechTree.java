@@ -86,7 +86,7 @@ public class ETechTree {
 		});
 		//Sectors
 		vanillaNode(SectorPresets.nuclearComplex, () -> {
-			node(ESectorPresets.meteor, [], Seq.with(new Research(Blocks.blastDrill)), () -> {
+			node(ESectorPresets.meteor, ItemStack.empty, Seq.with(new Research(Blocks.blastDrill)), () -> {
 
 			});
 		});
