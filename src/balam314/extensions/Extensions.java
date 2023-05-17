@@ -4,8 +4,7 @@ import arc.Events;
 import arc.util.Log;
 import arc.util.Log.LogLevel;
 import balam314.extensions.content.*;
-import balam314.extensions.util.Mode;
-import balam314.extensions.util.Util;
+import balam314.extensions.util.*;
 import mindustry.Vars;
 import mindustry.game.EventType;
 import mindustry.mod.Mod;
@@ -35,11 +34,12 @@ public class Extensions extends Mod{
     public void loadContent(){
         util.log("Loading content.");
 
-        ContentList[] allContent = {new EItems(), new EStatusEffects(), new ELiquids(), new EUnitTypes(), new EBlocks()};
+        ContentList[] allContent = {new EItems(), new EStatusEffects(), new ELiquids(), new EUnitTypes(), new EBlocks(), new ESectorPresets()};
         for(ContentList list : allContent) {
             list.load();
             util.log("Loaded " + list.getClass().getName());
         }
+        ETechTree.load();
         util.log("Content loaded!");
 
         if(mode == Mode.debug && false) {

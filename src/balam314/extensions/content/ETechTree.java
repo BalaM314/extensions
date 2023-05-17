@@ -76,7 +76,7 @@ public class ETechTree {
 	public static void load(){
 		//Items/liquids
 		vanillaNode(thorium, () -> {
-			nodeProd(iridium, Seq.with(/*new OnSector(ESectorPresets.meteor)*/), () -> {
+			nodeProd(iridium, Seq.with(new OnSector(ESectorPresets.meteor)), () -> {
 				nodeProd(advancedCoolant, Seq.with(new Produce(Liquids.cryofluid)));
 				nodeProd(protactinium, Seq.with(new Produce(phaseFabric)), () -> {
 					nodeProd(protactiniumPlasma);
