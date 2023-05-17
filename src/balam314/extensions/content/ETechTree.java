@@ -84,6 +84,11 @@ public class ETechTree {
 				});
 			});
 		});
-		//
+		//Sectors
+		vanillaNode(SectorPresets.nuclearComplex, () -> {
+			node(ESectorPresets.meteor, [], Seq.with(new Research(Blocks.blastDrill)), () -> {
+
+			});
+		});
 	}
 }
