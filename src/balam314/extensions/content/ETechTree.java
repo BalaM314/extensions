@@ -32,6 +32,9 @@ public class ETechTree {
 	public static TechNode node(UnlockableContent content, Runnable children){
 		return node(content, content.researchRequirements(), Seq.with(), children);
 	}
+	public static TechNode node(UnlockableContent content){
+		return node(content, content.researchRequirements(), Seq.with(), () -> {});
+	}
 
 	public static TechNode nodeProd(UnlockableContent content){
 		return nodeProd(content, Seq.with(), () -> {});
@@ -86,9 +89,59 @@ public class ETechTree {
 		});
 		//Sectors
 		vanillaNode(SectorPresets.nuclearComplex, () -> {
-			node(ESectorPresets.meteor, ItemStack.empty, Seq.with(new Research(Blocks.blastDrill)), () -> {
+			node(ESectorPresets.meteor, ItemStack.empty, Seq.with(new Research(blastDrill)), () -> {
 
 			});
 		});
+		//Blocks
+		vanillaNode(blastDrill, () -> {
+			node(EBlocks.impactDrill);
+		});
+		vanillaNode(phaseWeaver, () -> {
+			node(decayAccelerator, () -> {
+				node(quadWeaver);
+			});
+		});
+		vanillaNode(surgeSmelter, () -> node(fluxedOvercharger));
+		vanillaNode(cryofluidMixer, () -> node(advancedCoolantMixer));
+		vanillaNode(thoriumWall, () -> {
+			node(iridiumWall, () -> {
+				node(iridiumWallLarge);
+				node(radiantWall, () -> {
+					node(radiantWallLarge, () -> {
+						node(radiantWallHuge);
+					});
+				});
+			});
+		});
+		vanillaNode(powerNodeLarge, () -> node(protactiniumNode));
+		vanillaNode(surgeTower, () -> node(radiantNode));
+		vanillaNode(batteryLarge, () -> node(reinforcedBattery));
+		vanillaNode(thoriumReactor, () -> node(advancedReactor));
+		vanillaNode(overdriveDome, () -> node(radiantDome));
+		vanillaNode(largeSolarPanel, () -> node(advancedSolarPanel));
+		vanillaNode(additiveReconstructor, () -> node(sussifyingReconstructor));
+		vanillaNode(tetrativeReconstructor, () -> node(pentativeReconstructor));
+		vanillaNode(repairTurret, () -> node(repairField));
+		vanillaNode(forceProjector, () -> node(radiantShield));
+		vanillaNode(mendProjector, () -> node(protactiniumMender));
+		vanillaNode(coreNucleus, () -> {
+			node(coreNexus, () -> {
+				node(coreRadiant);
+			});
+		});
+		vanillaNode(vault, () -> node(crypt));
+		vanillaNode(armoredConveyor, () -> node(iridiumConveyor));
+		vanillaNode(distributor, () -> node(allocator));
+		vanillaNode(impulsePump, () -> node(impactPump));
+		vanillaNode(liquidTank, () -> node(liquidVault));
+		vanillaNode(segment, () -> node(ray));
+		vanillaNode(tsunami, () -> node(riptide));
+		vanillaNode(foreshadow, () -> node(muon));
+		vanillaNode(meltdown, () -> node(electron));
+		vanillaNode(spectre, () -> node(tauon));
+		vanillaNode(ripple, () -> node(fallout));
+		vanillaNode(duo, () -> node(surgeDuo));
+		vanillaNode(shockMine, () -> node(overchargedShockMine));
 	}
 }
