@@ -102,7 +102,7 @@ public class EBlocks implements ContentList {
 			itemCapacity = 30;
 		}};
 		decayAccelerator = new DetonatingCrafter("decay-accelerator"){{
-			requirements(Category.crafting, with(Items.surgeAlloy, 75, Items.phaseFabric, 100, Items.thorium, 150, Items.plastanium, 200, Items.silicon, 200));
+			requirements(Category.crafting, with(Items.surgeAlloy, 75, Items.phaseFabric, 100, Items.thorium, 150, EItems.iridium, 75, Items.plastanium, 200, Items.silicon, 200));
 			craftEffect = Fx.greenCloud;
 			outputItem = new ItemStack(EItems.protactinium, 2);
 			craftTime = 180f;
