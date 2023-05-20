@@ -4,7 +4,6 @@ Extends Mindustry's endgame by adding an extra tier of content.
 Use the power of iridium to beat powerful guardians in this campaign sector!
 
 ![image](https://github.com/BalaM314/extensions/assets/71201189/bad10e0d-a02a-4cd1-b8a1-9e4ac318b2fc)
-![image](https://github.com/BalaM314/extensions/assets/71201189/ccf95a63-a61b-46f6-935b-2db1e0f80b8a)
 
 Originality? Yes. Textures? No... t yet.
 
