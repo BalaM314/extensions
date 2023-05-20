@@ -1,2 +1,2 @@
-Impact pump texture: round corners, make decals not straight
-Make the radiant shield a decagon
+Impact pump texture: round inner corners
+change muon cost to not be same as electron

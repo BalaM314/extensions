@@ -4,6 +4,7 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.struct.*;
+import balam314.extensions.world.blocks.defense.*;
 import balam314.extensions.world.blocks.defense.turrets.*;
 import balam314.extensions.world.blocks.production.*;
 import mindustry.content.*;
@@ -31,6 +32,7 @@ import mindustry.world.meta.*;
 import static mindustry.type.ItemStack.with;
 import static mindustry.content.Items.*;
 import static balam314.extensions.content.EItems.*;
+import static balam314.extensions.content.ELiquids.*;
 
 public class EBlocks implements ContentList {
 
@@ -748,7 +750,7 @@ public class EBlocks implements ContentList {
 		}};
 
 
-		radiantShield = new ForceProjector("radiant-shield"){{
+		radiantShield = new RotatingForceProjector("radiant-shield"){{
 			requirements(Category.effect, with(radiantAlloy, 25, plastanium, 75, lead, 250, titanium, 200, silicon, 300));
 			size = 4;
 			radius = 180f;
