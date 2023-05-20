@@ -38,7 +38,7 @@ public class EBlocks implements ContentList {
 
 	iridiumOre,
 
-	impactDrill, decayAccelerator, quadWeaver, advancedCoolantMixer, fluxedOvercharger,
+	impactDrill, decayAccelerator, quadWeaver, advancedCoolantMixer, fluxedOvercharger, protactiniumVaporizer,
 
 	impactPump, liquidVault,
 
@@ -144,6 +144,22 @@ public class EBlocks implements ContentList {
 			consumePower(32f);
 			itemCapacity = 30;
 			liquidCapacity = 90f;
+		}};
+		protactiniumVaporizer = new DetonatingCrafter("protactinium-vaporizer"){{
+			requirements(Category.crafting, with(surgeAlloy, 100, lead, 200, thorium, 250, iridium, 175, plastanium, 250, silicon, 300));
+			craftEffect = Fx.greenCloud;
+			outputLiquid = new LiquidStack(protactiniumPlasma, 10f / 60f);
+			craftTime = 30f;
+			size = 3;
+			hasPower = true;
+
+			explosionRadius = 6;
+			explosionCauserName = "heat";
+
+			consumeItems(with(protactinium, 1));
+			antiDetonationCons = consumeLiquid(ELiquids.advancedCoolant, 8f / 60f);
+			consumePower(21f);
+			itemCapacity = 10;
 		}};
 		advancedCoolantMixer = new GenericCrafter("advanced-coolant-mixer"){{
 			requirements(Category.crafting, with(metaglass, 95, silicon, 150, iridium, 65, titanium, 100));
