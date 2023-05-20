@@ -486,7 +486,7 @@ public class EBlocks implements ContentList {
 			limitRange(24f);
 		}};
 		electron = new AdvancedContinuousLaserTurret("electron"){{
-			requirements(Category.turret, with(copper, 1600, silicon, 700, iridium, 550, surgeAlloy, 425, protactinium, 200, thorium, 800));
+			requirements(Category.turret, with(lead, 1600, silicon, 800, iridium, 550, surgeAlloy, 425, protactinium, 200, graphite, 800));
 			shootEffect = Fx.none;
 			overheatEffect = new Effect(60f, e -> {
 				Angles.randLenVectors(e.id, 24, 1f + e.fin() * 56f, (x, y) -> {
@@ -564,7 +564,7 @@ public class EBlocks implements ContentList {
 			consumePower(55f);
 		}};
 		muon = new ItemTurret("muon"){{
-			requirements(Category.turret, with(copper, 1400, silicon, 800, iridium, 550, surgeAlloy, 425, protactinium, 200, thorium, 800));
+			requirements(Category.turret, with(copper, 1400, silicon, 850, iridium, 625, thorium, 800, surgeAlloy, 450, protactinium, 175));
 
 			ammo(
 				iridium, new ArtilleryBulletType(12.5f, 800, "shell"){{
