@@ -141,7 +141,7 @@ public class EBlocks implements ContentList {
 			ambientSound = Sounds.electricHum;
 			ambientSoundVolume = 0.02f;
 
-			consumeItems(with(surgeAlloy, 2, iridium, 5, protactinium, 3, sporePod, 1));
+			consumeItems(with(surgeAlloy, 2, iridium, 5, protactinium, 3, graphite, 1));
 			consumeLiquid(ELiquids.advancedCoolant, 18f / 60f);
 			consumePower(32f);
 			itemCapacity = 30;
@@ -157,6 +157,8 @@ public class EBlocks implements ContentList {
 
 			explosionRadius = 6;
 			explosionCauserName = "heat";
+			explosionPuddleLiquid = ELiquids.protactiniumPlasma;
+			explosionPuddles = 20;
 
 			consumeItems(with(protactinium, 1));
 			antiDetonationCons = consumeLiquid(ELiquids.advancedCoolant, 8f / 60f);
@@ -754,6 +756,7 @@ public class EBlocks implements ContentList {
 			requirements(Category.effect, with(radiantAlloy, 25, plastanium, 75, lead, 250, titanium, 200, silicon, 300));
 			size = 4;
 			radius = 180f;
+			sides = 5;
 			phaseRadiusBoost = 80f;
 			shieldHealth = 2000f;
 			phaseShieldBoost = 1000f;

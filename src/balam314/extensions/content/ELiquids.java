@@ -23,7 +23,6 @@ public class ELiquids implements ContentList {
 			explosiveness = 7f;
 			effect = EStatusEffects.irradiated;
 			lightColor = Color.valueOf("7BF920");
-			gas = true;
 		}};
 	}
 }
