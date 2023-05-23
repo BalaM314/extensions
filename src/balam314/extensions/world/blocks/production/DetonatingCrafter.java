@@ -32,6 +32,10 @@ public class DetonatingCrafter extends GenericCrafter {
 	public Sound explosionSound = Sounds.explosion;
 	public String explosionCauserName = "sus-level";
 	public Color explosionBarColor = Color.lime;
+	public int explosionPuddles = 0;
+	public float explosionPuddleRange = tilesize * 5f;
+	public float explosionPuddleAmount = 100f;
+	public Liquid explosionPuddleLiquid = null;
 
 
 	public DetonatingCrafter(String name){
@@ -92,6 +96,14 @@ public class DetonatingCrafter extends GenericCrafter {
 
 			explosionEffect.at(this);
 			explosionSound.at(this);
+
+			if(explosionPuddleLiquid != null){
+				for(int i = 0; i < explosionPuddles; i ++){
+					Tmp.v1.trns(Mathf.random(360f), Mathf.random(explosionPuddleRange));
+					Tile tile = world.tileWorld(x + Tmp.v1.x, y + Tmp.v1.y);
+					Puddles.deposit(tile, explosionPuddleLiquid, explosionPuddleAmount);
+				}
+			}
 
 			if(explosionShake > 0){
 				Effect.shake(explosionShake, explosionShakeDuration, this);
