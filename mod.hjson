@@ -17,7 +17,7 @@ description: "Extends everything and improves the endgame by adding an extra tie
 version: 1.0
 
 #the minimum game build required to run this mod
-minGameVersion: 144
+minGameVersion: 145.1
 
 #this is a java mod
 java: true
