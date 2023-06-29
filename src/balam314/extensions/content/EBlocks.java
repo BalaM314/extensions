@@ -222,16 +222,16 @@ public class EBlocks implements ContentList {
 			size = 2;
 		}};
 		radiantWall = new Wall("radiant-wall"){{
-			requirements(Category.defense, with(radiantAlloy, 5, surgeAlloy, 8));
+			requirements(Category.defense, with(radiantAlloy, 5, graphite, 8));
 			health = wallHealthMultiplier * 380;
 		}};
 		radiantWallLarge = new Wall("radiant-wall-large"){{
-			requirements(Category.defense, with(radiantAlloy, 20, surgeAlloy, 24));
+			requirements(Category.defense, with(radiantAlloy, 20, graphite, 24));
 			health = wallHealthMultiplier * 4 * 380;
 			size = 2;
 		}};
 		radiantWallHuge = new Wall("radiant-wall-huge"){{
-			requirements(Category.defense, with(radiantAlloy, 45, surgeAlloy, 72));
+			requirements(Category.defense, with(radiantAlloy, 45, graphite, 72));
 			health = wallHealthMultiplier * 9 * 380;
 			size = 3;
 		}};
