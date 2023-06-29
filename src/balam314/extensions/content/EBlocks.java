@@ -861,9 +861,9 @@ public class EBlocks implements ContentList {
 			consumeLiquid(ELiquids.advancedCoolant, heating / coolantPower).update(false);
 		}};
 		advancedSolarPanel = new SolarGenerator("advanced-solar-generator"){{
-			requirements(Category.power, with(protactinium, 45, iridium, 56, silicon, 180, lead, 150));
+			requirements(Category.power, with(protactinium, 45, iridium, 50, silicon, 80, lead, 100));
 			size = 5;
-			powerProduction = 2.4f;
+			powerProduction = 3.4f;
 		}};
 
 		repairField = new RepairTower("repair-field"){{
