@@ -806,7 +806,7 @@ public class EBlocks implements ContentList {
 			researchCostMultiplier = 0.06f;
 		}};
 		coreRadiant = new CoreBlock("core-radiant"){{
-			requirements(Category.effect, with(radiantAlloy, 2000, protactinium, 4000, phaseFabric, 5500, iridium, 11000, copper, 18000, silicon, 20000));
+			requirements(Category.effect, with(radiantAlloy, 2000, protactinium, 4000, phaseFabric, 5500, iridium, 11000, copper, 18000, silicon, 20000, titanium, 9500));
 
 			unitType = UnitTypes.gamma;//TODO epsilon
 			health = 36000;

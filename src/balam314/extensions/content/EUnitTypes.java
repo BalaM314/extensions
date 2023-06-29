@@ -6,7 +6,9 @@ import mindustry.content.*;
 import mindustry.entities.bullet.*;
 import mindustry.entities.pattern.*;
 import mindustry.gen.*;
+import mindustry.graphics.*;
 import mindustry.type.*;
+import mindustry.type.weapons.*;
 import mindustry.world.meta.*;
 
 public class EUnitTypes implements ContentList {
@@ -98,6 +100,28 @@ public class EUnitTypes implements ContentList {
 					smokeEffect = Fx.shootSmallSmoke;
 					buildingDamageMultiplier = 0.01f;
 					homingPower = 0.04f;
+				}};
+			}}, new RepairBeamWeapon(){{
+				widthSinMag = 0.09f;
+				reload = 20f;
+				y = 4f;
+				rotate = false;
+				shootY = 0f;
+				beamWidth = 0.6f;
+				aimDst = 0f;
+				shootCone = 40f;
+
+				repairSpeed = 3.4f / 2f;
+				fractionRepairSpeed = 0.025f;
+
+				targetBuildings = true;
+				autoTarget = true;
+				controllable = false;
+				laserColor = Pal.accent;
+				healColor = Pal.accent;
+
+				bullet = new BulletType(){{
+					maxRange = 55f;
 				}};
 			}});
 		}};
