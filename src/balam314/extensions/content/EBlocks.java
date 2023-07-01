@@ -118,6 +118,9 @@ public class EBlocks implements ContentList {
 
 			ambientSound = Sounds.pulse;
 			ambientSoundVolume = 0.02f;
+			drawer = new DrawMulti(new DrawDefault(), new DrawGlowRegion(){{
+				color = Color.valueOf("00FF20");
+			}});
 
 			consumeItems(with(thorium, 5));
 			antiDetonationCons = consumeItem(phaseFabric, 2);
