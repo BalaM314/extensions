@@ -29,8 +29,8 @@ public class DetonatingCrafter extends GenericCrafter {
 	public int explosionRadius = 3;
 	public int explosionDamage = 100;
 	public Effect explosionEffect = Fx.massiveExplosion;
-	/** Time to detonate in ticks */
-	public float explosionTime = 2f * 60f;
+	/** Time to detonate in seconds */
+	public float explosionTime = 2f;
 	public float explosionShake = 0f;
 	public float explosionShakeDuration = 12f;
 	public Sound explosionSound = Sounds.explosion;
@@ -74,7 +74,7 @@ public class DetonatingCrafter extends GenericCrafter {
 				explosionTimer --;
 				if(explosionTimer < 0) explosionTimer = 0;
 			} else if(this.efficiency > 0){
-				explosionTimer += (1 - antidetonationEfficiency) * this.efficiency;
+				explosionTimer += (1 - antidetonationEfficiency) * this.efficiency * getDeltaTime();
 			}
 			if(explosionTimer >= explosionTime) this.kill();
 			super.updateTile();
