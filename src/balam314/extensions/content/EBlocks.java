@@ -138,6 +138,7 @@ public class EBlocks implements ContentList {
 			explodeOnDestruction = true;
 			explodeIfExternalDestruction = true;
 			explosionRadius = 9;
+			explosionDamage = 1280;
 			explosionEffect = Fx.massiveExplosion;
 			health = 1240;
 
@@ -159,6 +160,7 @@ public class EBlocks implements ContentList {
 			hasPower = true;
 
 			explosionRadius = 6;
+			explosionDamage = 650;
 			explosionCauserName = "heat";
 			explosionPuddleLiquid = ELiquids.protactiniumPlasma;
 			explosionPuddles = 20;
