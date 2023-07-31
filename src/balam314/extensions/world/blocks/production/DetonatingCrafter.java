@@ -74,7 +74,7 @@ public class DetonatingCrafter extends GenericCrafter {
 				explosionTimer --;
 				if(explosionTimer < 0) explosionTimer = 0;
 			} else if(this.efficiency > 0){
-				explosionTimer += (1 - antidetonationEfficiency) * this.efficiency;
+				explosionTimer += (1 - antidetonationEfficiency) * edelta();
 			}
 			if(explosionTimer >= explosionTime) this.kill();
 			super.updateTile();

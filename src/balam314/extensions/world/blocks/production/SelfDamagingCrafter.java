@@ -16,7 +16,7 @@ import static mindustry.Vars.*;
 public class SelfDamagingCrafter extends GenericCrafter {
 
 	public float healthLossPerSecondFrac = 0.1f;
-	public float healthLossPerTick;
+	public float healthLoss;
 	public boolean loseHealthIfInactive = false;
 
 	public boolean explodeOnDestruction = false;
@@ -37,13 +37,14 @@ public class SelfDamagingCrafter extends GenericCrafter {
 	@Override
 	public void init() {
 		super.init();
-		healthLossPerTick = (healthLossPerSecondFrac * this.health) / 60f;
+		if(healthLoss == 0)
+			healthLoss = (healthLossPerSecondFrac * this.health) / 60f;
 	}
 
 	@Override
 	public void setStats() {
 		super.setStats();
-		stats.add(EStats.healthLoss, healthLossPerTick * 60f, StatUnit.perSecond);
+		stats.add(EStats.healthLoss, healthLoss * 60f, StatUnit.perSecond);
 	}
 
 	public class SelfDamagingCrafterBuild extends GenericCrafterBuild {
@@ -51,7 +52,7 @@ public class SelfDamagingCrafter extends GenericCrafter {
 		@Override
 		public void updateTile() {
 			if(loseHealthIfInactive || this.efficiency > 0){
-				this.damagePassive(healthLossPerTick);
+				this.damagePassive(healthLoss * edelta());
 			}
 			super.updateTile();
 		}
