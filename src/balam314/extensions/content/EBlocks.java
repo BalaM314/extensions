@@ -92,7 +92,7 @@ public class EBlocks implements ContentList {
 			requirements(Category.crafting, with(protactinium, 50, iridium, 80, silicon, 160, lead, 210, thorium, 175));
 			craftEffect = Fx.smeltsmoke;
 			outputItem = new ItemStack(phaseFabric, 4);
-			craftTime = 240f;
+			craftTime = 480f;
 			boostAmount = 1f;
 			size = 3;
 			hasPower = true;
@@ -100,10 +100,10 @@ public class EBlocks implements ContentList {
 			ambientSound = Sounds.techloop;
 			ambientSoundVolume = 0.02f;
 
-			consumeItems(with(thorium, 5, sand, 9));
+			consumeItems(with(thorium, 8, sand, 16));
 			consumeItem(protactinium).boost();
-			consumePower(12f);
 			itemCapacity = 30;
+			consumePower(12f);
 		}};
 		decayAccelerator = new DetonatingCrafter("decay-accelerator"){{
 			requirements(Category.crafting, with(surgeAlloy, 75, phaseFabric, 100, thorium, 150, iridium, 75, plastanium, 200, silicon, 200));
@@ -792,7 +792,7 @@ public class EBlocks implements ContentList {
 			consumePower(50f);
 			size = 4;
 			range = 320f;
-			speedBoost = 3.5f;
+			speedBoost = 3.0f;
 			useTime = 150f;
 			hasBoost = false;
 			itemCapacity = 40;
@@ -857,7 +857,7 @@ public class EBlocks implements ContentList {
 			health = 2500;
 			itemDuration = 320f;
 			powerProduction = 75f;
-			heating = 0.02f;
+			heating = 0.2f;
 			explosionRadius = 1;
 			itemCapacity = 45;
 
@@ -887,8 +887,8 @@ public class EBlocks implements ContentList {
 			requirements(Category.units, with(radiantAlloy, 500, protactinium, 3000, surgeAlloy, 3200, iridium, 4000, phaseFabric, 3500, silicon, 12000, thorium, 12000));
 
 			size = 11;
-			consumePower(180f);
-			consumeItems(with(radiantAlloy, 200, protactinium, 1500, iridium, 3000, silicon, 4000, surgeAlloy, 1600, metaglass, 4000, phaseFabric, 2500));
+			consumePower(160f);
+			consumeItems(with(radiantAlloy, 225, protactinium, 1500, iridium, 2500, silicon, 3000, surgeAlloy, 1500, metaglass, 3000, phaseFabric, 2000));
 			consumeLiquid(ELiquids.advancedCoolant, 4f);
 			consumeLiquid(mindustry.content.Liquids.cryofluid, 6f);
 
